@@ -1,69 +1,68 @@
-# Integrate the Oddworks SDK
+## Download
 
-Our SDK is hosted on [Bintray](https://bintray.com/oddnetworks/maven/device-sdk/view).
-
-Include our oddworks repository in the `repositories` section of your app module's `build.gradle` file:
-
-```groovy
-// app/build.gradle
-
-repositories {
-    // ...
-    maven {
-        url  "http://oddnetworks.bintray.com/maven" 
-    }
-}
-```
-
-Now in the  `dependencies` section of your app module's `build.gradle` file add the Oddworks SDK:
-
-```groovy
-// app/build.gradle
-
-dependencies {
-    // ...
-    compile "io.oddworks:device-sdk:beta-1.0.0"
-}
-```
-
-There's one more _optional_ thing you can do to your application's `build.gradle` file that will be used in the next step. The SDK expects an app version when it's being initialized. One option would be to use your app module's `BuildConfig.VERSION_NAME`. Another might be to send your git revision.
-
-```groovy
-// app/build.gradle
-
-android {
-    // ...
-    defaultConfig {
-        // ...
-        resValue "string", "git_revision", gitRevision()
-    }
-    // ...
-}
-
-// ...
-
-def gitRevision() {
-    def cmd = "git rev-parse --short HEAD"
-    return cmd.execute().text.trim()
-}
-```
-
-Sync your project with Gradle files and you will have the device-sdk added to your External Libraries.
-
-
-# Configure Your Access Token
-
-The SDK also will need an access token to use when accessing the API. For instructions on how to receive your own access token check out our [API Guide](http://TODO.com).  Create a file in `app/res/values/` called `sdk_strings.xml`.
+[![Download](https://api.bintray.com/packages/oddnetworks/maven/device-sdk/images/download.svg)](https://bintray.com/oddnetworks/maven/device-sdk/_latestVersion) or grab via Maven:
 
 ```xml
-    <?xml version="1.0" encoding="utf-8"?>
-    <resources>
-        <string name="x_access_token">your-access-token-here</string>
-    </resources>
+<dependency>
+  <groupId>io.oddworks</groupId>
+  <artifactId>device-sdk</artifactId>
+  <version>{version}</version>
+</dependency>
 ```
 
-_For this guide we'll use a sample access token, which accesses NASA content._
+or Gradle:
 
-To receive this access token, [sign up for our beta program here](https://www.oddnetworks.com/).
+```
+repositories {
+    maven {
+        url 'http://oddnetworks.bintray.org/maven'
+    }
+}
 
-We strongly recommend adding any file that contains sensitive information to your project's `.gitignore` file. This access token should be kept private and not checked in to version control. Anyone who has your access token will be able to fetch your data.
+dependencies {
+    compile 'io.oddworks:device-sdk:{version}'
+}
+```
+
+## Configure
+
+You will need to configure a few pieces of application meta-data in `AndroidManifest.xml` to get started.
+
+First, you will need to specify the device-specific JSON Web Token (JWT) given by Oddworks.
+
+```xml
+<application>
+    <meta-data
+        android:name="io.oddworks.configJWT"
+        android:value="the-device-specific-jwt-given-by-the-oddworks-server" />
+</application>
+```
+
+Then, if you are using the enterprise Oddworks content service, you will need to add the `io.oddworks.apiBaseURL` meta-data. If you leave this out, the default endpoint will be used. See `Oddworks.DEFAULT_API_BASE_URL`.
+
+```xml
+<application>
+    <meta-data
+        android:name="io.oddworks.configJWT"
+        android:value="the-device-specific-jwt-given-by-the-oddworks-server" />
+    <meta-data
+        android:name="io.oddworks.apiBaseURL"
+        android:value="https://path-to-your-oddworks.com/version" />
+</application>
+```
+
+Finally, if you are using the enterprise Oddworks analytics service, you will need to add the `io.oddworks.analyticsApiBaseURL` meta-data. If you leave this out, the default endpoint will be used. See `Oddworks.DEFAULT_ANALYTICS_API_BASE_URL`.
+
+```xml
+<application>
+    <meta-data
+        android:name="io.oddworks.configJWT"
+        android:value="the-device-specific-jwt-given-by-the-oddworks-server" />
+    <meta-data
+        android:name="io.oddworks.apiBaseURL"
+        android:value="https://path-to-your-oddworks-content-service.com/version" />
+    <meta-data
+        android:name="io.oddworks.analyticsApiBaseURL"
+        android:value="https://path-to-your-oddworks-analytics-service.com" />
+</application>
+```
