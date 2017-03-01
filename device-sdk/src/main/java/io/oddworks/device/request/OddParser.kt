@@ -3,12 +3,12 @@ package io.oddworks.device.request
 import android.util.Log
 import android.webkit.MimeTypeMap
 import io.oddworks.device.exception.OddParseException
+import io.oddworks.device.metric.OddMetric
 import io.oddworks.device.model.*
 import io.oddworks.device.model.common.*
 import io.oddworks.device.model.config.Display
 import io.oddworks.device.model.config.Features
 import io.oddworks.device.model.config.features.Authentication
-import io.oddworks.device.model.config.features.Metric
 import io.oddworks.device.model.video.OddCast
 import io.oddworks.device.model.video.OddSource
 import org.json.JSONArray
@@ -448,21 +448,28 @@ object OddParser {
     }
 
     @Throws(JSONException::class)
-    private fun parseMetricsFeature(rawFeatures: JSONObject): Pair<Set<Metric>, Boolean> {
+    private fun parseMetricsFeature(rawFeatures: JSONObject): Pair<Set<OddMetric.Type>, Boolean> {
         val rawMetrics = SafeJSONParser.getJSONObject(rawFeatures, "metrics", false) ?: return Pair(emptySet(), false)
 
         val enabled = SafeJSONParser.getBoolean(rawMetrics, "enabled")
 
-        val metrics = mutableSetOf<Metric>()
-        Metric.MetricType.values().forEach {
+        val metrics = mutableSetOf<OddMetric.Type>()
+        OddMetric.Type.values().forEach {
+            // parse metric config and set OddMetric.Type enum values
             val rawMetric = SafeJSONParser.getJSONObject(rawMetrics, it.key, false) ?: return@forEach
             val individualEnabled = SafeJSONParser.getBoolean(rawMetric, "enabled")
             val action = SafeJSONParser.getString(rawMetric, "action")
             val interval = SafeJSONParser.getInt(rawMetric, "interval")
-            metrics.add(Metric(it, individualEnabled, action, interval))
+            it.enabled = individualEnabled
+            if (action != null && action.isNotBlank()) {
+                it.action = action
+            }
+            if (interval > 0) {
+                it.interval = interval
+            }
+            metrics.add(it)
         }
 
-        Metric.setupOddMetrics(metrics.toSet()) // MAGIC!
 
         return Pair(metrics, enabled)
 

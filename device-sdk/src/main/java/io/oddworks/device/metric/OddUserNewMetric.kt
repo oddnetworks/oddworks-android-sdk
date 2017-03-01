@@ -1,20 +1,18 @@
 package io.oddworks.device.metric
 
+import android.content.Context
 import org.json.JSONObject
 
 
-class OddUserNewMetric(contentType: String? = null, contentId: String? = null, meta: JSONObject? = null) : OddMetric(contentType, contentId, meta) {
+class OddUserNewMetric(context: Context,
+                       sessionId: String,
+                       contentType: String? = null,
+                       contentId: String? = null,
+                       meta: JSONObject? = null) : OddMetric(context, contentType, contentId, sessionId, meta) {
 
     override val action: String
-        get() = OddUserNewMetric.action
+        get() = OddMetric.Type.USER_NEW.action
 
     override val enabled: Boolean
-        get() = OddUserNewMetric.enabled
-
-    companion object {
-        private val TAG = OddUserNewMetric::class.java.simpleName
-
-        var action = OddMetric.ACTION_USER_NEW
-        var enabled = false
-    }
+        get() = OddMetric.Type.USER_NEW.enabled
 }

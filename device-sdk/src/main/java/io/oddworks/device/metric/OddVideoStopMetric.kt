@@ -1,17 +1,26 @@
 package io.oddworks.device.metric
 
+import android.content.Context
 import android.util.Log
 
 import org.json.JSONException
 import org.json.JSONObject
 
-class OddVideoStopMetric(contentType: String, contentId: String, val title: String, meta: JSONObject? = null, val elapsed: Int = 0, val duration: Int = 0) : OddMetric(contentType, contentId, meta) {
+class OddVideoStopMetric(context: Context,
+                         contentType: String,
+                         contentId: String,
+                         sessionId: String,
+                         val videoSessionId: String,
+                         val title: String,
+                         meta: JSONObject? = null,
+                         val elapsed: Int = 0,
+                         val duration: Int = 0) : OddMetric(context, contentType, contentId, sessionId, meta) {
 
     override val action: String
-        get() = OddVideoStopMetric.action
+        get() = OddMetric.Type.VIDEO_STOP.action
 
     override val enabled: Boolean
-        get() = OddVideoStopMetric.enabled
+        get() = OddMetric.Type.VIDEO_STOP.enabled
 
     override fun toJSONObject(): JSONObject {
         val json = super.toJSONObject()
@@ -20,6 +29,7 @@ class OddVideoStopMetric(contentType: String, contentId: String, val title: Stri
             val data = json.getJSONObject("data")
             val attributes = data.getJSONObject("attributes")
 
+            attributes.put("videoSessionId", videoSessionId)
             attributes.put("contentTitle", title)
             attributes.put("elapsed", elapsed)
             attributes.put("duration", duration)
@@ -27,20 +37,13 @@ class OddVideoStopMetric(contentType: String, contentId: String, val title: Stri
             data.put("attributes", attributes)
             json.put("data", data)
         } catch (e: JSONException) {
-            Log.d(TAG, e.toString())
+            Log.d(OddVideoStopMetric::class.java.simpleName, e.toString())
         }
 
         return json
     }
 
     override fun toString(): String {
-        return "$TAG (type=$type, contentType=$contentType, contentId=$contentId, meta=${meta.toString()}, elapsed=$elapsed, duration=$duration)"
-    }
-
-    companion object {
-        private val TAG = OddVideoStopMetric::class.java.simpleName
-
-        var action = OddMetric.ACTION_VIDEO_STOP
-        var enabled = false
+        return "${OddVideoStopMetric::class.java.simpleName} (type=$type, contentType=$contentType, contentId=$contentId, meta=${meta.toString()}, elapsed=$elapsed, duration=$duration)"
     }
 }

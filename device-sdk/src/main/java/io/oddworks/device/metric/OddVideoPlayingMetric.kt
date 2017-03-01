@@ -1,17 +1,26 @@
 package io.oddworks.device.metric
 
+import android.content.Context
 import android.util.Log
 
 import org.json.JSONException
 import org.json.JSONObject
 
-class OddVideoPlayingMetric(contentType: String, contentId: String, val title: String, meta: JSONObject? = null, val elapsed: Int = 0, val duration: Int = 0) : OddMetric(contentType, contentId, meta) {
+class OddVideoPlayingMetric(context: Context,
+                            contentType: String,
+                            contentId: String,
+                            sessionId: String,
+                            val videoSessionId: String,
+                            val title: String,
+                            meta: JSONObject? = null,
+                            val elapsed: Int = 0,
+                            val duration: Int = 0) : OddMetric(context, contentType, contentId, sessionId, meta) {
 
     override val action: String
-        get() = OddVideoPlayingMetric.action
+        get() = OddMetric.Type.VIDEO_PLAYING.action
 
     override val enabled: Boolean
-        get() = OddVideoPlayingMetric.enabled
+        get() = OddMetric.Type.VIDEO_PLAYING.enabled
 
     override fun toJSONObject(): JSONObject {
         val json = super.toJSONObject()
@@ -20,6 +29,7 @@ class OddVideoPlayingMetric(contentType: String, contentId: String, val title: S
             val data = json.getJSONObject("data")
             val attributes = data.getJSONObject("attributes")
 
+            attributes.put("videoSessionId", videoSessionId)
             attributes.put("contentTitle", title)
             attributes.put("elapsed", elapsed)
             attributes.put("duration", duration)
@@ -27,24 +37,13 @@ class OddVideoPlayingMetric(contentType: String, contentId: String, val title: S
             data.put("attributes", attributes)
             json.put("data", data)
         } catch (e: JSONException) {
-            Log.d(TAG, e.toString())
+            Log.d(OddVideoPlayingMetric::class.java.simpleName, e.toString())
         }
 
         return json
     }
 
     override fun toString(): String {
-        return "$TAG (type=$type, contentType=$contentType, contentId=$contentId, meta=${meta.toString()}, elapsed=$elapsed, duration=$duration)"
-    }
-
-    companion object {
-        private val TAG = OddVideoPlayingMetric::class.java.simpleName
-
-        val DEFAULT_INTERVAL = 10000
-
-        var action = OddMetric.ACTION_VIDEO_PLAYING
-        var enabled = false
-
-        var interval = DEFAULT_INTERVAL
+        return "${OddVideoPlayingMetric::class.java.simpleName} (type=$type, contentType=$contentType, contentId=$contentId, meta=${meta.toString()}, elapsed=$elapsed, duration=$duration)"
     }
 }
