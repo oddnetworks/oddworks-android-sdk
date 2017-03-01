@@ -6,7 +6,7 @@ import io.oddworks.device.service.OddRxBus
 import org.json.JSONException
 import org.json.JSONObject
 
-abstract class OddMetric(protected val contentType: String?, protected val contentId: String?, protected val title: String?, protected val meta: JSONObject?) : OddRxBus.OddRxBusEvent {
+abstract class OddMetric(protected val contentType: String?, protected val contentId: String?, protected val meta: JSONObject?) : OddRxBus.OddRxBusEvent {
     abstract val action: String
     abstract val enabled: Boolean
 
@@ -30,7 +30,6 @@ abstract class OddMetric(protected val contentType: String?, protected val conte
             attributes.put("viewer", viewerId)
             attributes.put("contentType", contentType)
             attributes.put("contentId", contentId)
-            attributes.put("title", title)
 
             data.put("attributes", attributes)
             data.put("meta", meta)

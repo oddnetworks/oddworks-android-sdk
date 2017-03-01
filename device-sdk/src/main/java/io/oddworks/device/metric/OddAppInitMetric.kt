@@ -2,7 +2,7 @@ package io.oddworks.device.metric
 
 import org.json.JSONObject
 
-class OddAppInitMetric(contentType: String? = null, contentId: String? = null, title: String? = null, meta: JSONObject? = null) : OddMetric(contentType, contentId, title, meta) {
+class OddAppInitMetric(contentType: String? = null, contentId: String? = null, meta: JSONObject? = null) : OddMetric(contentType, contentId, meta) {
 
     override val action: String
         get() = OddAppInitMetric.action
