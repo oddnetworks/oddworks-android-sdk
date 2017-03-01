@@ -1,0 +1,29 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/activity_odd_authentication"
+              style="@style/OddAuthenticationTheme.LinearLayout"
+              tools:context="io.oddworks.device.authentication.OddAuthenticationActivity">
+    <TextView
+        android:id="@+id/odd_authentication_message"
+        style="@style/OddAuthenticationTheme.MessageTextView"/>
+
+    <EditText
+        android:id="@+id/odd_authentication_email"
+        style="@style/OddAuthenticationTheme.EmailEditText"/>
+
+    <EditText
+        android:id="@+id/odd_authentication_password"
+        android:imeActionId="@+id/odd_authentication_sign_in"
+        android:imeOptions="actionUnspecified"
+        style="@style/OddAuthenticationTheme.PasswordEditText"/>
+
+    <Button
+        android:onClick="submit"
+        android:id="@+id/odd_authentication_button"
+        style="@style/OddAuthenticationTheme.Button"/>
+
+    <ProgressBar
+        android:id="@+id/odd_authentication_progress"
+        style="@style/OddAuthenticationTheme.ProgressBar"
+        tools:visibility="visible"/>
+</LinearLayout>

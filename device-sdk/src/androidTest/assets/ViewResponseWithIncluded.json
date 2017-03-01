@@ -1,0 +1,220 @@
+{
+  "included": [
+    {
+      "id": "channel-id-callout-1",
+      "type": "collection",
+      "attributes": {
+        "channel": "channel-id",
+        "images": [
+          {
+            "url": "https://spaceholder.cc/1920x1080",
+            "mimeType": "image/jpeg"
+          }
+        ],
+        "title": "Callout One"
+      },
+      "relationships": {
+        "entities": {
+          "data": [
+            {
+              "id": "0002f6455e424db5b96214454e6ddb10",
+              "type": "video"
+            },
+            {
+              "id": "0d387c80d2514597b0365a20a9a586cb",
+              "type": "video"
+            },
+            {
+              "id": "1204da45e42743b0be3afdc5cf51eeeb",
+              "type": "video"
+            },
+            {
+              "id": "1252a72ba1684f77815ed26fc63aff0f",
+              "type": "video"
+            },
+            {
+              "id": "channel-id-clips",
+              "type": "collection"
+            },
+            {
+              "id": "2990e1185a8e4402b157b57d8eba44d3",
+              "type": "video"
+            }
+          ]
+        }
+      },
+      "links": {
+        "self": "https://content.oddworks.io/v2/collections/channel-id-callout-1"
+      },
+      "meta": {
+        "updatedAt": "2016-09-20T13:21:42.276Z",
+        "source": "itunes"
+      }
+    },
+    {
+      "id": "channel-id-callout-2",
+      "type": "collection",
+      "attributes": {
+        "channel": "channel-id",
+        "images": [
+          {
+            "url": "https://spaceholder.cc/1920x1080",
+            "mimeType": "image/jpeg"
+          }
+        ],
+        "title": "Callout Two"
+      },
+      "relationships": {
+        "entities": {
+          "data": [
+            {
+              "id": "f7991f3c7cad55f4647ac87743890fdd",
+              "type": "video"
+            },
+            {
+              "id": "42baaa6e1e9ce2bb6d96d53007656f02",
+              "type": "video"
+            },
+            {
+              "id": "ffbdc598fafb224911fc19101e8f8380",
+              "type": "video"
+            },
+            {
+              "id": "7931da1fcbc2a4a1b9f6e15911bbe49e",
+              "type": "video"
+            },
+            {
+              "id": "abb965b72485016c308182ecdf0e2999",
+              "type": "video"
+            },
+            {
+              "id": "9873e416ac64ceab43ba87198a54d1f1",
+              "type": "video"
+            }
+          ]
+        }
+      },
+      "links": {
+        "self": "https://content.oddworks.io/v2/collections/channel-id-callout-2"
+      },
+      "meta": {
+        "updatedAt": "2016-09-20T13:21:42.584Z",
+        "source": "itunes"
+      }
+    },
+    {
+      "id": "channel-id-callout-3",
+      "type": "collection",
+      "attributes": {
+        "channel": "channel-id",
+        "images": [
+          {
+            "url": "https://spaceholder.cc/1920x1080",
+            "mimeType": "image/jpeg"
+          }
+        ],
+        "title": "Callout Three"
+      },
+      "relationships": {
+        "entities": {
+          "data": [
+            {
+              "id": "e67dcdb71ee443a92d40539839d84f10",
+              "type": "video"
+            },
+            {
+              "id": "bc49b8d9b477e890501a2808ae31ccc1",
+              "type": "video"
+            },
+            {
+              "id": "6562e1f95a0e5cc71c819263367ee71c",
+              "type": "video"
+            },
+            {
+              "id": "02c2560ad61f4dc9e09c035f2e530f66",
+              "type": "video"
+            },
+            {
+              "id": "dc839543e40ddfdd8390ee40f92b1b3c",
+              "type": "video"
+            },
+            {
+              "id": "963d3b2210a23572344e10d31700c477",
+              "type": "video"
+            }
+          ]
+        }
+      },
+      "links": {
+        "self": "https://content.oddworks.io/v2/collections/channel-id-callout-3"
+      },
+      "meta": {
+        "updatedAt": "2016-09-20T13:21:42.424Z",
+        "source": "itunes"
+      }
+    },
+    {
+      "id": "channel-id-promotion",
+      "type": "promotion",
+      "attributes": {
+        "channel": "channel-id",
+        "images": [
+          {
+            "url": "http://dummyimage.com/16:9x1440&text=Promotion",
+            "mimeType": "image/png"
+          }
+        ],
+        "title": "Channel Sample's Daily Show",
+        "description": "Promote your content with Odd Networks!"
+      },
+      "relationships": {},
+      "links": {
+        "self": "https://content.oddworks.io/v2/promotions/channel-id-promotion"
+      },
+      "meta": {}
+    }
+  ],
+  "data": {
+    "id": "channel-id-home-view",
+    "type": "view",
+    "attributes": {
+      "channel": "channel-id",
+      "title": "Channel Sample Homepage"
+    },
+    "relationships": {
+      "callouts": {
+        "data": [
+          {
+            "id": "channel-id-callout-1",
+            "type": "collection"
+          },
+          {
+            "id": "channel-id-callout-2",
+            "type": "collection"
+          },
+          {
+            "id": "channel-id-callout-3",
+            "type": "collection"
+          }
+        ]
+      },
+      "promotion": {
+        "data": {
+          "id": "channel-id-promotion",
+          "type": "promotion"
+        }
+      }
+    },
+    "links": {
+      "self": "https://content.oddworks.io/v2/views/channel-id-home-view"
+    },
+    "meta": {}
+  },
+  "links": {
+    "self": "https://content.oddworks.io/v2/views/channel-id-home-view"
+  },
+  "meta": {
+    "channel": "channel-id",
+    "platform": "ANDROID"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "data": {
+    "id": "channel-id-home-view",
+    "type": "view",
+    "attributes": {
+      "channel": "channel-id",
+      "title": "Channel Sample Homepage"
+    },
+    "relationships": {
+      "callouts": {
+        "data": [
+          {
+            "id": "channel-id-callout-1",
+            "type": "collection"
+          },
+          {
+            "id": "channel-id-callout-2",
+            "type": "collection"
+          },
+          {
+            "id": "channel-id-callout-3",
+            "type": "collection"
+          }
+        ]
+      },
+      "promotion": {
+        "data": {
+          "id": "channel-id-promotion",
+          "type": "promotion"
+        }
+      }
+    },
+    "links": {
+      "self": "https://content.oddworks.io/v2/views/channel-id-home-view"
+    },
+    "meta": {}
+  },
+  "links": {
+    "self": "https://content.oddworks.io/v2/views/channel-id-home-view"
+  },
+  "meta": {
+    "channel": "channel-id",
+    "platform": "ANDROID"
+  }
+}

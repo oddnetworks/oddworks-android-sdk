@@ -1,0 +1,81 @@
+{
+  "data": {
+    "id": "channel-id-channel-id-android",
+    "type": "config",
+    "attributes": {
+      "active": true,
+      "display": {
+        "colors": [],
+        "images": [
+          {
+            "label": "logo",
+            "url": "https://assets.oddnetworks.com/paul.svg",
+            "mimeType": "image/svg+xml"
+          }
+        ],
+        "fonts": []
+      },
+      "features": {
+        "sharing": {
+          "enabled": true,
+          "text": "Watch the Channel Name shows Live on mobile and TV connected platforms!"
+        },
+        "metrics": {
+          "enabled": true,
+          "appInit": {
+            "enabled": true,
+            "action": "app:init"
+          },
+          "viewLoad": {
+            "enabled": true,
+            "action": "view:load"
+          },
+          "videoError": {
+            "enabled": true,
+            "action": "video:error"
+          },
+          "videoPlaying": {
+            "enabled": false,
+            "interval": 30000,
+            "action": "video:playing"
+          },
+          "videoStop": {
+            "enabled": true,
+            "action": "video:stop"
+          },
+          "videoLoad": {
+            "enabled": true,
+            "action": "video:load"
+          },
+          "videoPlay": {
+            "enabled": true,
+            "action": "video:play"
+          },
+          "userNew": {
+            "enabled": true,
+            "action": "user:new"
+          }
+        },
+        "authentication": {
+          "enabled": true,
+          "type": "link",
+          "url": "http://oddchannels.com/login"
+        }
+      },
+      "views": {
+        "splash": "channel-id-splash-view",
+        "menu": "channel-id-menu-view",
+        "homepage": "channel-id-home-view"
+      },
+      "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaGFubmVsIjoiY2hhbm5lbC1pZCIsInBsYXRmb3JtIjoiY2hhbm5lbC1pZC1hbmRyb2lkIiwidmlld2VyIjoiMThiMDc4OWUtODdlYy00YjBhLWI4NmQtMmJhMzBmYmZlZDE4IiwiaWF0IjoxNDc1ODUxNTI1LCJhdWQiOlsicGxhdGZvcm0iXSwiaXNzIjoidXJuOm9kZHdvcmtzOmNoYW5uZWwtaWQifQ.YhtfeL1VICAGfdY5Ely1sfQ_U3KJb0cMYwEVEE5kfeE"
+    },
+    "meta": {}
+  },
+  "links": {
+    "self": "http://content.oddworks.io/v2/config"
+  },
+  "meta": {
+    "channel": "channel-id",
+    "platform": "ANDROID"
+  }
+}

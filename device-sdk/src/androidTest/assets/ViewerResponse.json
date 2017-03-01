@@ -1,0 +1,38 @@
+{
+  "data": {
+    "id": "success@channel-name.com",
+    "type": "viewer",
+    "attributes": {
+      "channel": "channel-name",
+      "email": "success@channel-name.com",
+      "entitlements": [],
+      "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaGFubmVsIjoiY2hhbm5lbC1uYW1lIiwicGxhdGZvcm0iOiJjaGFubmVsLW5hbWUtYW5kcm9pZCIsInZpZXdlciI6InN1Y2Nlc3NAY2hhbm5lbC1uYW1lLmNvbSIsImlhdCI6MTQ3ODI3MzUzNiwiYXVkIjpbInBsYXRmb3JtIl0sImlzcyI6InVybjpvZGR3b3JrcyJ9.QyoPmgMchjtoH3-Q201sT-kquRjKyeF5VuDoRm58oDw"
+    },
+    "relationships": {
+      "platforms": {
+        "data": [
+          {
+            "id": "channel-name-android",
+            "type": "platform"
+          }
+        ]
+      },
+      "watchlist": {
+        "data": []
+      }
+    },
+    "links": {
+      "self": "https://content.oddworks.io/v2/viewers/success@channel-name.com"
+    },
+    "meta": {
+      "jwt": ""
+    }
+  },
+  "links": {
+    "self": "https://content.oddworks.io/v2/viewers/success@channel-name.com"
+  },
+  "meta": {
+    "channel": "channel-name",
+    "platform": "channel-name-android"
+  }
+}

@@ -69,7 +69,7 @@ public class RxOddCall<T> implements Observable.OnSubscribe<T>{
             }
 
             @Override
-            public void onFailure(Exception e) {
+            public void onFailure(Throwable e) {
                 if(subscriber != null) {
                     try {
                         subscriber.onError(e);

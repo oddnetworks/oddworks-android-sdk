@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="io.oddworks.oddsample">
+
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+
+    <uses-permission android:maxSdkVersion="22" android:name="android.permission.MANAGE_ACCOUNTS"/>
+    <uses-permission android:maxSdkVersion="22" android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <uses-permission android:maxSdkVersion="22" android:name="android.permission.USE_CREDENTIALS"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name=".OddSample"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:networkSecurityConfig="@xml/network_security_config">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".KotlinActivity">
+        </activity>
+        <activity android:name="io.oddworks.device.authentication.OddAuthenticationActivity" android:label="@string/login_label" />
+        <service android:name="io.oddworks.device.authentication.OddAuthenticatorService">
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator" />
+            </intent-filter>
+            <meta-data android:name="android.accounts.AccountAuthenticator"
+                       android:resource="@xml/oddworks_authenticator" />
+        </service>
+
+        <meta-data android:name="io.oddworks.configJWT"
+                   android:value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaGFubmVsIjoibmFzYSIsInBsYXRmb3JtIjoibmFzYS1hbmRyb2lkIiwiYXVkIjpbInBsYXRmb3JtIl0sImlzcyI6InVybjpvZGR3b3JrcyJ9.6a4tEL3hTYGC2Z-iWVp_0aVqx17TKZ37i2F10lPkBRI" />
+    </application>
+
+</manifest>

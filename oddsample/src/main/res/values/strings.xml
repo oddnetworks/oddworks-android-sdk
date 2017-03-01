@@ -1,0 +1,7 @@
+<resources>
+    <string name="oddworks_account_type">io.oddworks.oddsample.account</string>
+    <string name="app_name">OddSample</string>
+    <string name="login_label">Log In to OddSample</string>
+    <string name="oddworks_sample_app">Oddworks Sample App</string>
+    <string name="sign_in">Sign In</string>
+</resources>

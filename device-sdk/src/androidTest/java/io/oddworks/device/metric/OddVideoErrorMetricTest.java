@@ -11,60 +11,54 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(AndroidJUnit4.class)
 public class OddVideoErrorMetricTest {
-    private String orgId = "odd-networks";
     private String contentType = "aThing";
     private String contentId = "thingId";
+    private String title = "vid title";
     private OddVideoErrorMetric oddVideoErrorMetric;
 
     @Before
     public void beforeEach() {
-        oddVideoErrorMetric = new OddVideoErrorMetric();
+        oddVideoErrorMetric = new OddVideoErrorMetric(contentType, contentId, title, null);
     }
 
     @Test
 	public void testGetType() throws Exception {
         assertEquals("event", oddVideoErrorMetric.getType());
     }
-
-    @Test
-	public void testGetOrganizationId() throws Exception {
-        oddVideoErrorMetric.setOrganizationId(orgId);
-        assertEquals(orgId, oddVideoErrorMetric.getOrganizationId());
-    }
-
     @Test
 	public void testGetAction() throws Exception {
-        assertEquals(OddAppInitMetric.ACTION_VIDEO_ERROR, oddVideoErrorMetric.getAction());
+        assertEquals(OddMetric.Companion.getACTION_VIDEO_ERROR(), oddVideoErrorMetric.getAction());
     }
 
     @Test
 	public void testGetContentType() throws Exception {
-        oddVideoErrorMetric.setContentType(contentType);
         assertEquals(contentType, oddVideoErrorMetric.getContentType());
     }
 
     @Test
 	public void testGetContentId() throws Exception {
-        oddVideoErrorMetric.setContentId(contentId);
         assertEquals(contentId, oddVideoErrorMetric.getContentId());
     }
 
     @Test
-	public void testToJSONObject() throws Exception {
-        OddVideoErrorMetric metric = new OddVideoErrorMetric();
-        metric.setOrganizationId(orgId);
-        metric.setContentType(contentType);
-        metric.setContentId(contentId);
+    public void testGetTitle() throws Exception {
+        assertEquals(title, oddVideoErrorMetric.getTitle());
+    }
 
-        String expected = "{" +
+    @Test
+	public void testToJSONObject() throws Exception {
+        OddVideoErrorMetric metric = new OddVideoErrorMetric(contentType, contentId, title, null);
+
+        String expected = "{\"data\": {" +
                 "type: \"" + metric.getType() + "\"," +
                 "attributes: {" +
-                "organizationId: \"" + metric.getOrganizationId() + "\"," +
                 "action: \"" + metric.getAction() + "\"," +
                 "contentType: \"" + metric.getContentType() + "\"," +
-                "contentId: \"" + metric.getContentId() + "\"" +
+                "contentId: \"" + metric.getContentId() + "\"," +
+                "title: \"" + metric.getTitle() + "\"," +
+                "viewer: \"" + metric.getViewerId() + "\"" +
                 "}" +
-                "}";
+                "}}";
 
         JSONAssert.assertEquals(expected, metric.toJSONObject(), true);
     }

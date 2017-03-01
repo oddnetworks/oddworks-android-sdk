@@ -10,20 +10,10 @@ extra_css: []
 pages:
 - Welcome:
     - Introduction: index.md
-    - "Oddworks Overview": overview.md
-    - "Sample Application": sample_application.md
+    - Overview: overview.md
 - "Getting Started":
-    - "Library and Project Setup": setup.md
-    - "Configuring your App": getting_started.md
-    - "Understanding the SDK Data Models": data_models.md
-- "The Basics of Oddworks":
-    - "Initialize API Calls": initialize_api_calls.md
-    - "Working with Data": working_with_data.md
-    - "Search": search.md
-- "Authenticating Users":
-    - "Authentication Process": auth_process.md
-    - "Entitlements": entitlements.md
-- "Capturing Metrics":
-    - "Configuration": metrics_configuration.md
-    - "Sending Metrics": sending_metrics.md
+    - Setup: setup.md
+    - Requests: requests.md
+    - Authentication: authentication.md
+    - Analytics: analytics.md
 theme: readthedocs

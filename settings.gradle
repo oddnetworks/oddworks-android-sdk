@@ -1,1 +1,1 @@
-include ':device-sdk'
+include ':device-sdk', ':oddsample'

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme. -->
+    <style name="OddAuthenticationTheme" parent="@style/Theme.AppCompat.NoActionBar">
+    </style>
+    <style name="OddAuthenticationTheme.LinearLayout" parent="OddAuthenticationTheme">
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+    <style name="OddAuthenticationTheme.MessageTextView" parent="OddAuthenticationTheme">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Caption</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:text">@string/account_message</item>
+    </style>
+    <style name="OddAuthenticationTheme.EditText" parent="@style/Widget.AppCompat.EditText">
+    </style>
+    <style name="OddAuthenticationTheme.EmailEditText" parent="OddAuthenticationTheme.EditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:hint">@string/prompt_email</item>
+        <item name="android:inputType">textEmailAddress</item>
+        <item name="android:maxLines">1</item>
+    </style>
+    <style name="OddAuthenticationTheme.PasswordEditText" parent="OddAuthenticationTheme.EditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:hint">@string/prompt_password</item>
+        <item name="android:imeActionLabel">@string/action_sign_in_short</item>
+        <item name="android:inputType">textPassword</item>
+        <item name="android:maxLines">1</item>
+    </style>
+    <style name="OddAuthenticationTheme.Button" parent="@style/Widget.AppCompat.Button.Colored">
+        <item name="android:text">@string/action_sign_in</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="OddAuthenticationTheme.ProgressBar" parent="@style/Widget.AppCompat.ProgressBar">
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:visibility">gone</item>
+    </style>
+</resources>
