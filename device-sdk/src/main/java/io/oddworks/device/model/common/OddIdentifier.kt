@@ -1,20 +1,6 @@
 package io.oddworks.device.model.common
 
-import android.os.Parcel
-import android.os.Parcelable
-
-open class OddIdentifier(val id: String, val type: OddResourceType) : Parcelable {
-
-    constructor(parcel: Parcel): this(parcel.readString(), OddResourceType.valueOf(parcel.readString()))
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    override fun writeToParcel(dest: Parcel, flags: Int) {
-        dest.writeString(id)
-        dest.writeString(type.toString())
-    }
+open class OddIdentifier(val id: String, val type: OddResourceType) {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -31,17 +17,5 @@ open class OddIdentifier(val id: String, val type: OddResourceType) : Parcelable
         var result = id.hashCode()
         result = 31 * result + type.hashCode()
         return result
-    }
-
-    companion object {
-        @JvmField val CREATOR: Parcelable.Creator<OddIdentifier> = object : Parcelable.Creator<OddIdentifier> {
-            override fun createFromParcel(`in`: Parcel): OddIdentifier {
-                return OddIdentifier(`in`)
-            }
-
-            override fun newArray(size: Int): Array<OddIdentifier?> {
-                return arrayOfNulls(size)
-            }
-        }
     }
 }
