@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Erik Straub">
+  <link rel="shortcut icon" href="../assets/favicon.ico">
+  
+  <title>Analytics - Oddworks SDK for Android</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Analytics";
+    var mkdocs_page_input_path = "analytics.md";
+    var mkdocs_page_url = "/analytics/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-68853545-3', 'android.guide.oddnetworks.com');
+      ga('send', 'pageview');
+  </script>
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Oddworks SDK for Android</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Welcome</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="..">Introduction</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../overview/">Overview</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Getting Started</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../setup/">Setup</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../requests/">Requests</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../authentication/">Authentication</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Analytics</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#sending-oddmetric-requests-manually">Sending OddMetric requests manually</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#sending-oddmetric-requests-via-the-oddrxbus">Sending OddMetric requests via the OddRxBus</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Oddworks SDK for Android</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Getting Started &raquo;</li>
+        
+      
+    
+    <li>Analytics</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/oddnetworks/oddworks-android-sdk/edit/master/docs/analytics.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p>There are two ways of sending analytics metrics.</p>
+<h2 id="sending-oddmetric-requests-manually">Sending OddMetric requests manually</h2>
+<p>Note: Be careful about making requests on the main thread.</p>
+<pre><code class="java">// from within your activity
+
+OddCallback&lt;OddMetric&gt; metricCallback = new OddCallback&lt;OddMetric&gt;() {
+    @Override
+    public void onSuccess(OddMetric resource) {
+        Log.d(TAG, &quot;handleOddMetric: SUCCESS $resource}&quot;)
+    }
+
+    @Override
+    public void onFailure(@NotNull Exception exception) {
+        Log.d(TAG, &quot;handleOddMetric: FAILURE $exception&quot;)
+        if (exception is BadResponseCodeException) {
+            Log.d(TAG, &quot;handleOddMetric code: ${exception.code} errors: ${exception.oddErrors}&quot;)
+        }
+    }
+};
+
+OddRequest.Builder(context, OddResourceType.EVENT)
+                        .event(event)
+                        .build()
+                        .enqueueRequest(oddMetricCallback)
+</code></pre>
+
+<h2 id="sending-oddmetric-requests-via-the-oddrxbus">Sending OddMetric requests via the OddRxBus</h2>
+<p>You will first need to enable the OddMetricHandler. A good place to do this is in your Application class.</p>
+<pre><code class="java">
+public class YourApp extends Application {
+  @Override
+  public void onCreate() {
+      super.onCreate();
+
+      // Enable handling of published analytics events
+      OddMetricHandler.enable(this);
+  }
+}
+</code></pre>
+
+<p>Using the OddMetricHandler ensures the POST requests are sent on an IO Scheduler thread.</p>
+<p>Next, when you are ready to enqueue an OddMetric request, simply use the <code>OddRxBus.publish()</code> function.</p>
+<pre><code class="java">
+// from within an activity
+OddAppInitMetric metric = new OddAppInitMetric();
+
+OddRxBus.publish(metric);
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../authentication/" class="btn btn-neutral" title="Authentication"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Odd Networks</p>
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/oddnetworks/oddworks-android-sdk" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../authentication/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+    <script src="../js/theme.js"></script>
+      <script src="../javadoc/1.0.2/script.js"></script>
+      <script src="../javadoc/1.2.1/script.js"></script>
+      <script src="../javadoc/1.3.0/script.js"></script>
+      <script src="../javadoc/1.4.1/script.js"></script>
+      <script src="../javadoc/1.5.1/script.js"></script>
+      <script src="../javadoc/1.6.0/script.js"></script>
+      <script src="../javadoc/1.7.6/script.js"></script>
+      <script src="../javadoc/1.8.0/script.js"></script>
+      <script src="../javadoc/3.0.0/script.js"></script>
+
+</body>
+</html>

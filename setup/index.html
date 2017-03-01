@@ -7,43 +7,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <meta name="author" content="Erik Straub">
-  
-  <title>Library and Project Setup - Oddworks SDK for Android</title>
-  
-
   <link rel="shortcut icon" href="../assets/favicon.ico">
   
-
-  
+  <title>Setup - Oddworks SDK for Android</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
   <link rel="stylesheet" href="../css/highlight.css">
-
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Library and Project Setup";
+    var mkdocs_page_name = "Setup";
     var mkdocs_page_input_path = "setup.md";
     var mkdocs_page_url = "/setup/";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
   <script src="../js/modernizr-2.8.3.min.js"></script>
-  <script type="text/javascript" src="../js/highlight.pack.js"></script>
-  <script src="../js/theme.js"></script> 
-  <script src="../javadoc/1.0.2/script.js"></script>
-  <script src="../javadoc/1.2.1/script.js"></script>
-  <script src="../javadoc/1.3.0/script.js"></script>
-  <script src="../javadoc/1.4.1/script.js"></script>
-  <script src="../javadoc/1.5.1/script.js"></script>
-  <script src="../javadoc/1.6.0/script.js"></script>
-  <script src="../javadoc/1.7.6/script.js"></script>
-  <script src="../javadoc/1.8.0/script.js"></script>
-  <script src="../javadoc/1.8.2/script.js"></script>
-  <script src="../javadoc/1.8.3/script.js"></script>
-
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
   
   <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -73,7 +55,7 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        <ul class="current">
+	<ul class="current">
           
             <li>
     <ul class="subnav">
@@ -89,14 +71,7 @@
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../overview/">Oddworks Overview</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../sample_application/">Sample Application</a>
+        <a class="" href="../overview/">Overview</a>
         
     </li>
 
@@ -111,14 +86,14 @@
         
             
     <li class="toctree-l1 current">
-        <a class="current" href="./">Library and Project Setup</a>
+        <a class="current" href="./">Setup</a>
         
             <ul>
             
-                <li class="toctree-l3"><a href="#integrate-the-oddworks-sdk">Integrate the Oddworks SDK</a></li>
+                <li class="toctree-l3"><a href="#download">Download</a></li>
                 
             
-                <li class="toctree-l3"><a href="#configure-your-access-token">Configure Your Access Token</a></li>
+                <li class="toctree-l3"><a href="#configure">Configure</a></li>
                 
             
             </ul>
@@ -128,87 +103,21 @@
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../getting_started/">Configuring your App</a>
+        <a class="" href="../requests/">Requests</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../data_models/">Understanding the SDK Data Models</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>The Basics of Oddworks</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../initialize_api_calls/">Initialize API Calls</a>
+        <a class="" href="../authentication/">Authentication</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../working_with_data/">Working with Data</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../search/">Search</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>Authenticating Users</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../auth_process/">Authentication Process</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../entitlements/">Entitlements</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>Capturing Metrics</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../metrics_configuration/">Configuration</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../sending_metrics/">Sending Metrics</a>
+        <a class="" href="../analytics/">Analytics</a>
         
     </li>
 
@@ -242,12 +151,11 @@
         
       
     
-    <li>Library and Project Setup</li>
+    <li>Setup</li>
     <li class="wy-breadcrumbs-aside">
       
-        
-          <a href="https://github.com/oddnetworks/oddworks-android-sdk" class="icon icon-github"> Edit on GitHub</a>
-        
+        <a href="https://github.com/oddnetworks/oddworks-android-sdk/edit/master/docs/setup.md"
+          class="icon icon-github"> Edit on GitHub</a>
       
     </li>
   </ul>
@@ -256,60 +164,61 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="integrate-the-oddworks-sdk">Integrate the Oddworks SDK</h1>
-<p>Our SDK is hosted on <a href="https://bintray.com/oddnetworks/maven/device-sdk/view">Bintray</a>.</p>
-<p>Include our oddworks repository in the <code>repositories</code> section of your app module's <code>build.gradle</code> file:</p>
-<pre><code class="groovy">// app/build.gradle
-
-repositories {
-    // ...
-    maven {
-        url  &quot;http://oddnetworks.bintray.com/maven&quot; 
-    }
-}
+                <h2 id="download">Download</h2>
+<p><a href="https://bintray.com/oddnetworks/maven/device-sdk/_latestVersion"><img alt="Download" src="https://api.bintray.com/packages/oddnetworks/maven/device-sdk/images/download.svg" /></a> or grab via Maven:</p>
+<pre><code class="xml">&lt;dependency&gt;
+  &lt;groupId&gt;io.oddworks&lt;/groupId&gt;
+  &lt;artifactId&gt;device-sdk&lt;/artifactId&gt;
+  &lt;version&gt;{version}&lt;/version&gt;
+&lt;/dependency&gt;
 </code></pre>
 
-<p>Now in the  <code>dependencies</code> section of your app module's <code>build.gradle</code> file add the Oddworks SDK:</p>
-<pre><code class="groovy">// app/build.gradle
+<p>or Gradle:</p>
+<pre><code>repositories {
+    maven {
+        url 'http://oddnetworks.bintray.org/maven'
+    }
+}
 
 dependencies {
-    // ...
-    compile &quot;io.oddworks:device-sdk:beta-1.0.0&quot;
+    compile 'io.oddworks:device-sdk:{version}'
 }
 </code></pre>
 
-<p>There's one more <em>optional</em> thing you can do to your application's <code>build.gradle</code> file that will be used in the next step. The SDK expects an app version when it's being initialized. One option would be to use your app module's <code>BuildConfig.VERSION_NAME</code>. Another might be to send your git revision.</p>
-<pre><code class="groovy">// app/build.gradle
-
-android {
-    // ...
-    defaultConfig {
-        // ...
-        resValue &quot;string&quot;, &quot;git_revision&quot;, gitRevision()
-    }
-    // ...
-}
-
-// ...
-
-def gitRevision() {
-    def cmd = &quot;git rev-parse --short HEAD&quot;
-    return cmd.execute().text.trim()
-}
+<h2 id="configure">Configure</h2>
+<p>You will need to configure a few pieces of application meta-data in <code>AndroidManifest.xml</code> to get started.</p>
+<p>First, you will need to specify the device-specific JSON Web Token (JWT) given by Oddworks.</p>
+<pre><code class="xml">&lt;application&gt;
+    &lt;meta-data
+        android:name=&quot;io.oddworks.configJWT&quot;
+        android:value=&quot;the-device-specific-jwt-given-by-the-oddworks-server&quot; /&gt;
+&lt;/application&gt;
 </code></pre>
 
-<p>Sync your project with Gradle files and you will have the device-sdk added to your External Libraries.</p>
-<h1 id="configure-your-access-token">Configure Your Access Token</h1>
-<p>The SDK also will need an access token to use when accessing the API. For instructions on how to receive your own access token check out our <a href="http://TODO.com">API Guide</a>.  Create a file in <code>app/res/values/</code> called <code>sdk_strings.xml</code>.</p>
-<pre><code class="xml">    &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-    &lt;resources&gt;
-        &lt;string name=&quot;x_access_token&quot;&gt;your-access-token-here&lt;/string&gt;
-    &lt;/resources&gt;
+<p>Then, if you are using the enterprise Oddworks content service, you will need to add the <code>io.oddworks.apiBaseURL</code> meta-data. If you leave this out, the default endpoint will be used. See <code>Oddworks.DEFAULT_API_BASE_URL</code>.</p>
+<pre><code class="xml">&lt;application&gt;
+    &lt;meta-data
+        android:name=&quot;io.oddworks.configJWT&quot;
+        android:value=&quot;the-device-specific-jwt-given-by-the-oddworks-server&quot; /&gt;
+    &lt;meta-data
+        android:name=&quot;io.oddworks.apiBaseURL&quot;
+        android:value=&quot;https://path-to-your-oddworks.com/version&quot; /&gt;
+&lt;/application&gt;
 </code></pre>
 
-<p><em>For this guide we'll use a sample access token, which accesses NASA content.</em></p>
-<p>To receive this access token, <a href="https://www.oddnetworks.com/">sign up for our beta program here</a>.</p>
-<p>We strongly recommend adding any file that contains sensitive information to your project's <code>.gitignore</code> file. This access token should be kept private and not checked in to version control. Anyone who has your access token will be able to fetch your data.</p>
+<p>Finally, if you are using the enterprise Oddworks analytics service, you will need to add the <code>io.oddworks.analyticsApiBaseURL</code> meta-data. If you leave this out, the default endpoint will be used. See <code>Oddworks.DEFAULT_ANALYTICS_API_BASE_URL</code>.</p>
+<pre><code class="xml">&lt;application&gt;
+    &lt;meta-data
+        android:name=&quot;io.oddworks.configJWT&quot;
+        android:value=&quot;the-device-specific-jwt-given-by-the-oddworks-server&quot; /&gt;
+    &lt;meta-data
+        android:name=&quot;io.oddworks.apiBaseURL&quot;
+        android:value=&quot;https://path-to-your-oddworks-content-service.com/version&quot; /&gt;
+    &lt;meta-data
+        android:name=&quot;io.oddworks.analyticsApiBaseURL&quot;
+        android:value=&quot;https://path-to-your-oddworks-analytics-service.com&quot; /&gt;
+&lt;/application&gt;
+</code></pre>
               
             </div>
           </div>
@@ -317,10 +226,10 @@ def gitRevision() {
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../getting_started/" class="btn btn-neutral float-right" title="Configuring your App">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../requests/" class="btn btn-neutral float-right" title="Requests">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../sample_application/" class="btn btn-neutral" title="Sample Application"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../overview/" class="btn btn-neutral" title="Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -341,22 +250,32 @@ def gitRevision() {
       </div>
 
     </section>
-
+    
   </div>
 
-<div class="rst-versions" role="note" style="cursor: pointer">
+  <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
           <a href="https://github.com/oddnetworks/oddworks-android-sdk" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../sample_application/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../overview/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../getting_started/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../requests/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
+    <script src="../js/theme.js"></script>
+      <script src="../javadoc/1.0.2/script.js"></script>
+      <script src="../javadoc/1.2.1/script.js"></script>
+      <script src="../javadoc/1.3.0/script.js"></script>
+      <script src="../javadoc/1.4.1/script.js"></script>
+      <script src="../javadoc/1.5.1/script.js"></script>
+      <script src="../javadoc/1.6.0/script.js"></script>
+      <script src="../javadoc/1.7.6/script.js"></script>
+      <script src="../javadoc/1.8.0/script.js"></script>
+      <script src="../javadoc/3.0.0/script.js"></script>
 
 </body>
 </html>
