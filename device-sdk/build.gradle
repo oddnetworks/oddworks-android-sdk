@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-//apply plugin: 'org.jetbrains.dokka-android'
+apply plugin: 'org.jetbrains.dokka-android'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
@@ -17,7 +17,7 @@ ext {
     siteUrl = 'http://android.guide.oddnetworks.com'
     gitUrl = 'https://github.com/oddnetworks/OddworksDeviceSDK'
 
-    libraryVersion = '3.0.0-rc9'
+    libraryVersion = '3.0.0'
 
     developerId = 'brkattk'
     developerName = 'Erik Straub, Dan Pallas'
@@ -119,34 +119,34 @@ task sourcesJar(type: Jar) {
     classifier = 'sources'
 }
 
-//dokka {
-//    moduleName = 'device-sdk'
-//    outputFormat = 'javadoc'
-//    outputDirectory = "$buildDir/docs/javadoc"
-////    processConfigurations = ['compile', 'extra']
-////    includes = ['packages.md', 'extra.md']
-////    samples = ['samples/basic.kt', 'samples/advanced.kt']
-//    linkMapping {
-//        dir = "src/main/java"
-//        url = "https://github.com/oddnetworks/oddworks-android-sdk/blob/master/device-sdk/src/main/java"
-//        suffix = "#L"
-//    }
-//    sourceDirs = files('src/main/java')
-//}
+dokka {
+    moduleName = 'device-sdk'
+    outputFormat = 'javadoc'
+    outputDirectory = "$buildDir/docs/javadoc"
+//    processConfigurations = ['compile', 'extra']
+//    includes = ['packages.md', 'extra.md']
+//    samples = ['samples/basic.kt', 'samples/advanced.kt']
+    linkMapping {
+        dir = "src/main/java"
+        url = "https://github.com/oddnetworks/oddworks-android-sdk/blob/master/device-sdk/src/main/java"
+        suffix = "#L"
+    }
+    sourceDirs = files('src/main/java')
+}
 
-//task javadocJar(type: Jar, dependsOn: dokka) {
-//    classifier = 'javadoc'
-//    from dokka.outputDirectory
-//}
-//
-//task copyDocs(type: Copy, dependsOn: dokka) {
-//    from 'build/docs/javadoc'
-//    into "../docs/docs/javadoc/$version"
-//}
+task javadocJar(type: Jar, dependsOn: dokka) {
+    classifier = 'javadoc'
+    from dokka.outputDirectory
+}
+
+task copyDocs(type: Copy, dependsOn: dokka) {
+    from 'build/docs/javadoc'
+    into "../docs/docs/javadoc/$version"
+}
 
 artifacts {
     archives sourcesJar
-//    archives javadocJar
+    archives javadocJar
 }
 
 bintray {
