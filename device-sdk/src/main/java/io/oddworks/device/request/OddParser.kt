@@ -1,6 +1,7 @@
 package io.oddworks.device.request
 
 import android.util.Log
+import android.webkit.MimeTypeMap
 import io.oddworks.device.exception.OddParseException
 import io.oddworks.device.model.*
 import io.oddworks.device.model.common.*
@@ -229,6 +230,8 @@ object OddParser {
 
         val rawCast = SafeJSONParser.getJSONArray(rawAttributes, "cast", false)
         val cast = parseCast(rawCast)
+        val rawTags = SafeJSONParser.getJSONArray(rawAttributes, "tags", false)
+        val tags = parseTags(rawTags)
 
         val included = parseResourceArray(rawIncluded)
 
@@ -245,6 +248,7 @@ object OddParser {
                 duration,
                 genres,
                 cast,
+                tags,
                 releaseDate,
                 position,
                 complete)
@@ -323,16 +327,31 @@ object OddParser {
         }
         val images = mutableSetOf<OddImage>()
 
-        for(i in 0..(rawImages.length() -1)) {
+        loop@for(i in 0..(rawImages.length() -1)) {
             val rawImage = rawImages.getJSONObject(i)
 
-            val url = SafeJSONParser.getString(rawImage, "url") ?: ""
-            val mimeType = SafeJSONParser.getString(rawImage, "mimeType") ?: ""
-            val width = SafeJSONParser.getInt(rawImage, "width")
-            val height = SafeJSONParser.getInt(rawImage, "height")
-            val label = SafeJSONParser.getString(rawImage, "label") ?: ""
+            val url = SafeJSONParser.getString(rawImage, "url")
+            var rawMimeType = SafeJSONParser.getString(rawImage, "mimeType")
+            if (rawMimeType == null && url != null) {
+               val extension = MimeTypeMap.getFileExtensionFromUrl(url)
+                rawMimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension)
+            }
+            if (rawMimeType != null && url != null) {
+                val mimeType = OddImage.MimeType.valueFromMimeType(rawMimeType)
+                if (mimeType == null) {
+                    Log.w(TAG, "Unknown image mimeType - skipping")
+                    continue@loop
+                }
 
-            images.add(OddImage(url, mimeType, width, height, label))
+                val width = SafeJSONParser.getInt(rawImage, "width")
+                val height = SafeJSONParser.getInt(rawImage, "height")
+                val label = SafeJSONParser.getString(rawImage, "label") ?: ""
+
+                images.add(OddImage(url, mimeType, width, height, label))
+            } else {
+                Log.w(TAG, "No image url ($url) or image mimeType ($rawMimeType) - skipping")
+                continue@loop
+            }
         }
 
         return images.toSet()
@@ -460,12 +479,7 @@ object OddParser {
     private fun parseGenres(rawGenres: JSONArray?): MutableSet<String> {
         val genres = mutableSetOf<String>()
         if (rawGenres != null) {
-            for (i in 0..(rawGenres.length() -1)) {
-                val genre = rawGenres.getString(i)
-                if (genre != null) {
-                    genres.add(genre)
-                }
-            }
+            (0..(rawGenres.length() -1)).mapNotNullTo(genres) { rawGenres.getString(it) }
         }
         return genres
     }
@@ -474,18 +488,41 @@ object OddParser {
     private fun parseSources(rawSources: JSONArray?): MutableSet<OddSource> {
         val sources = mutableSetOf<OddSource>()
         if (rawSources != null) {
-            for (i in 0..(rawSources.length() -1)) {
+            loop@for (i in 0..(rawSources.length() -1)) {
                 val rawSource = rawSources.getJSONObject(i)
 
-                val url = SafeJSONParser.getString(rawSource, "url") ?: ""
-                val container = SafeJSONParser.getString(rawSource, "container") ?: ""
-                val mimeType = SafeJSONParser.getString(rawSource, "mimeType") ?: ""
-                val width = SafeJSONParser.getInt(rawSource, "width")
-                val height = SafeJSONParser.getInt(rawSource, "height")
-                val maxBitrate = SafeJSONParser.getInt(rawSource, "maxBitrate")
-                val label = SafeJSONParser.getString(rawSource, "label") ?: ""
+                val url = SafeJSONParser.getString(rawSource, "url")
+                val rawMimeType = SafeJSONParser.getString(rawSource, "mimeType")
+                if (url == null || rawMimeType == null) {
+                    Log.w(TAG, "Unknown source url ($url) or source mimeType ($rawMimeType) - skipping")
+                    continue@loop
+                } else {
+                    val container = SafeJSONParser.getString(rawSource, "container") ?: ""
+                    val label = SafeJSONParser.getString(rawSource, "label") ?: ""
+                    val rawSourceType = SafeJSONParser.getString(rawSource, "sourceType")
+                    val broadcasting = SafeJSONParser.getBoolean(rawSource, "broadcasting")
 
-                sources.add(OddSource(url, container, mimeType, width, height, maxBitrate, label))
+                    val sourceType = if (rawSourceType == null) {
+                        Log.d(TAG, "source missing sourceType - default VOD")
+                        OddSource.SourceType.VOD
+                    } else {
+                        try {
+                            OddSource.SourceType.valueOf(rawSourceType)
+                        } catch (e: IllegalArgumentException) {
+                            Log.d(TAG, "source unknown sourceType - default VOD")
+                            OddSource.SourceType.VOD
+                        }
+                    }
+
+                    val mimeType = OddSource.MimeType.valueFromMimeType(rawMimeType)
+
+                    if (mimeType == null) {
+                        Log.w(TAG, "source mimeType ($rawMimeType) not valid - skipping")
+                        continue@loop
+                    }
+
+                    sources.add(OddSource(url, container, mimeType, label, sourceType, broadcasting))
+                }
             }
         }
 
@@ -508,6 +545,15 @@ object OddParser {
         }
 
         return cast
+    }
+
+    @Throws(JSONException::class)
+    private fun parseTags(rawTags: JSONArray?): MutableSet<String> {
+        val tags = mutableSetOf<String>()
+        if (rawTags != null) {
+            (0..(rawTags.length() -1)).mapNotNullTo(tags) { rawTags.getString(it) }
+        }
+        return tags
     }
 
 //    fun parseSearch(result: String): List<OddObject> {
