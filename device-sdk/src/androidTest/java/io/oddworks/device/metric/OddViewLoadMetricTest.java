@@ -1,5 +1,7 @@
 package io.oddworks.device.metric;
 
+import android.content.Context;
+import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Before;
@@ -15,10 +17,14 @@ public class OddViewLoadMetricTest {
     private String contentId = "thingId";
     private String title = "view title";
     private OddViewLoadMetric oddViewLoadMetric;
+    private Context ctx;
+    private String sessionId;
 
     @Before
     public void beforeEach() {
-        oddViewLoadMetric = new OddViewLoadMetric(contentType, contentId, title, null);
+        sessionId = "foobarbaz";
+        ctx = InstrumentationRegistry.getTargetContext();
+        oddViewLoadMetric = new OddViewLoadMetric(ctx, contentType, contentId, sessionId, title, null);
     }
 
     @Test
@@ -28,7 +34,7 @@ public class OddViewLoadMetricTest {
 
     @Test
 	public void testGetAction() throws Exception {
-        assertEquals(OddMetric.Companion.getACTION_VIEW_LOAD(), oddViewLoadMetric.getAction());
+        assertEquals(OddMetric.Type.VIEW_LOAD.getAction(), oddViewLoadMetric.getAction());
     }
 
     @Test
@@ -55,7 +61,8 @@ public class OddViewLoadMetricTest {
                 "action: \"" + oddViewLoadMetric.getAction() + "\"," +
                 "contentType: \"" + oddViewLoadMetric.getContentType() + "\"," +
                 "contentId: \"" + oddViewLoadMetric.getContentId() + "\"," +
-                "title: \"" + oddViewLoadMetric.getTitle() + "\"," +
+                "contentTitle: \"" + oddViewLoadMetric.getTitle() + "\"," +
+                "sessionId: \"" + oddViewLoadMetric.getSessionId() + "\"," +
                 "viewer: \"" + oddViewLoadMetric.getViewerId() + "\"" +
                 "}" +
                 "}}";

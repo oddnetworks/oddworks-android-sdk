@@ -1,6 +1,8 @@
 package io.oddworks.device.metric;
 
 
+import android.content.Context;
+import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.json.JSONObject;
@@ -15,11 +17,15 @@ import static org.junit.Assert.assertEquals;
 public class OddAppInitMetricTest {
     private OddAppInitMetric oddAppInitMetric;
     private JSONObject customJSON;
+    private Context ctx;
+    private String sessionId;
 
     @Before
     public void beforeEach() {
+        sessionId = "foobarbaz";
+        ctx = InstrumentationRegistry.getTargetContext();
         customJSON = new JSONObject();
-        oddAppInitMetric = new OddAppInitMetric(null, null, null, customJSON);
+        oddAppInitMetric = new OddAppInitMetric(ctx, null, null, sessionId, customJSON);
     }
 
     @Test
@@ -30,7 +36,7 @@ public class OddAppInitMetricTest {
 
     @Test
 	public void testGetAction() throws Exception {
-        assertEquals(OddMetric.Companion.getACTION_APP_INIT(), oddAppInitMetric.getAction());
+        assertEquals(OddMetric.Type.APP_INIT.getAction(), oddAppInitMetric.getAction());
     }
 
     @Test
@@ -44,19 +50,15 @@ public class OddAppInitMetricTest {
     }
 
     @Test
-    public void testGetTitle() throws Exception {
-        assertEquals(null, oddAppInitMetric.getTitle());
-    }
-
-    @Test
 	public void testToJSONObject() throws Exception {
         customJSON.put("foo", "bar");
-        OddAppInitMetric metric = new OddAppInitMetric(null, null, null, customJSON);
+        OddAppInitMetric metric = new OddAppInitMetric(ctx, null, null, sessionId, customJSON);
 
         String expected = "{\"data\": {" +
                 "type: \"" + metric.getType() + "\"," +
                 "attributes: {" +
                 "action: \"" + metric.getAction() + "\"," +
+                "sessionId: \"" + metric.getSessionId() + "\"," +
                 "viewer: \"" + metric.getViewerId() + "\"" +
                 "}," +
                 "meta: {" +

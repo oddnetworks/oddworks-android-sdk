@@ -1,6 +1,8 @@
 package io.oddworks.device.metric;
 
 
+import android.content.Context;
+import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Before;
@@ -16,10 +18,16 @@ public class OddVideoPlayMetricTest {
     private String contentId = "thingId";
     private String title = "vid title";
     private OddVideoPlayMetric oddVideoPlayMetric;
+    private Context ctx;
+    private String sessionId;
+    private String videoSessionId;
 
     @Before
     public void beforeEach() {
-        oddVideoPlayMetric = new OddVideoPlayMetric(contentType, contentId, title, null);
+        sessionId = "foobarbaz";
+        videoSessionId = "buzz";
+        ctx = InstrumentationRegistry.getTargetContext();
+        oddVideoPlayMetric = new OddVideoPlayMetric(ctx, contentType, contentId, sessionId, videoSessionId, title, null);
     }
 
     @Test
@@ -29,7 +37,7 @@ public class OddVideoPlayMetricTest {
 
     @Test
 	public void testGetAction() throws Exception {
-        assertEquals(OddMetric.Companion.getACTION_VIDEO_PLAY(), oddVideoPlayMetric.getAction());
+        assertEquals(OddMetric.Type.VIDEO_PLAY.getAction(), oddVideoPlayMetric.getAction());
     }
 
     @Test
@@ -54,8 +62,10 @@ public class OddVideoPlayMetricTest {
                 "attributes: {" +
                 "action: \"" + oddVideoPlayMetric.getAction() + "\"," +
                 "contentType: \"" + oddVideoPlayMetric.getContentType() + "\"," +
+                "contentTitle: \"" + oddVideoPlayMetric.getTitle() + "\"," +
                 "contentId: \"" + oddVideoPlayMetric.getContentId() + "\"," +
-                "title: \"" + oddVideoPlayMetric.getTitle() + "\"," +
+                "sessionId: \"" + oddVideoPlayMetric.getSessionId() + "\"," +
+                "videoSessionId: \"" + oddVideoPlayMetric.getVideoSessionId() + "\"," +
                 "viewer: \"" + oddVideoPlayMetric.getViewerId() + "\"" +
                 "}" +
                 "}}";

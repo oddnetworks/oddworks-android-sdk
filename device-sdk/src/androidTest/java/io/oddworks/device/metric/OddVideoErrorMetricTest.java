@@ -1,5 +1,7 @@
 package io.oddworks.device.metric;
 
+import android.content.Context;
+import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Before;
@@ -15,10 +17,16 @@ public class OddVideoErrorMetricTest {
     private String contentId = "thingId";
     private String title = "vid title";
     private OddVideoErrorMetric oddVideoErrorMetric;
+    private Context ctx;
+    private String sessionId;
+    private String videoSessionId;
 
     @Before
     public void beforeEach() {
-        oddVideoErrorMetric = new OddVideoErrorMetric(contentType, contentId, title, null);
+        sessionId = "foobarbaz";
+        videoSessionId = "buzz";
+        ctx = InstrumentationRegistry.getTargetContext();
+        oddVideoErrorMetric = new OddVideoErrorMetric(ctx, contentType, contentId, sessionId, videoSessionId, title, null);
     }
 
     @Test
@@ -27,7 +35,7 @@ public class OddVideoErrorMetricTest {
     }
     @Test
 	public void testGetAction() throws Exception {
-        assertEquals(OddMetric.Companion.getACTION_VIDEO_ERROR(), oddVideoErrorMetric.getAction());
+        assertEquals(OddMetric.Type.VIDEO_ERROR.getAction(), oddVideoErrorMetric.getAction());
     }
 
     @Test
@@ -47,15 +55,17 @@ public class OddVideoErrorMetricTest {
 
     @Test
 	public void testToJSONObject() throws Exception {
-        OddVideoErrorMetric metric = new OddVideoErrorMetric(contentType, contentId, title, null);
+        OddVideoErrorMetric metric = new OddVideoErrorMetric(ctx, contentType, contentId, sessionId, videoSessionId, title, null);
 
         String expected = "{\"data\": {" +
                 "type: \"" + metric.getType() + "\"," +
                 "attributes: {" +
                 "action: \"" + metric.getAction() + "\"," +
                 "contentType: \"" + metric.getContentType() + "\"," +
+                "contentTitle: \"" + metric.getTitle() + "\"," +
                 "contentId: \"" + metric.getContentId() + "\"," +
-                "title: \"" + metric.getTitle() + "\"," +
+                "sessionId: \"" + metric.getSessionId() + "\"," +
+                "videoSessionId: \"" + metric.getVideoSessionId() + "\"," +
                 "viewer: \"" + metric.getViewerId() + "\"" +
                 "}" +
                 "}}";

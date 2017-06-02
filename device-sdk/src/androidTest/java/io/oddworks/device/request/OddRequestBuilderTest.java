@@ -123,7 +123,7 @@ public class OddRequestBuilderTest {
 
     @Test
     public void testEvent() throws Exception {
-        OddAppInitMetric event = new OddAppInitMetric();
+        OddAppInitMetric event = new OddAppInitMetric(ctx, null, null, "foobar", null);
         assertNull(builder.getEvent());
         OddRequest.Builder test = builder.event(event);
         assertThat(test.getEvent(), is((OddMetric) event));

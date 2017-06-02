@@ -1,6 +1,8 @@
 package io.oddworks.device.metric;
 
 
+import android.content.Context;
+import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 import android.util.Log;
 
@@ -20,10 +22,16 @@ public class OddVideoPlayingMetricTest {
     private int duration = 1234;
     private int customInterval = 312;
     private OddVideoPlayingMetric oddVideoPlayingMetric;
+    private Context ctx;
+    private String sessionId;
+    private String videoSessionId;
 
     @Before
     public void beforeEach() {
-        oddVideoPlayingMetric = new OddVideoPlayingMetric(contentType, contentId, title, null, elapsed, duration);
+        sessionId = "foobarbaz";
+        videoSessionId = "buzz";
+        ctx = InstrumentationRegistry.getTargetContext();
+        oddVideoPlayingMetric = new OddVideoPlayingMetric(ctx, contentType, contentId, sessionId, videoSessionId, title, null, elapsed, duration);
     }
 
     @Test
@@ -33,7 +41,7 @@ public class OddVideoPlayingMetricTest {
 
     @Test
     public void testGetAction() throws Exception {
-        assertEquals(OddMetric.Companion.getACTION_VIDEO_PLAYING(), oddVideoPlayingMetric.getAction());
+        assertEquals(OddMetric.Type.VIDEO_PLAYING.getAction(), oddVideoPlayingMetric.getAction());
     }
 
     @Test
@@ -53,18 +61,17 @@ public class OddVideoPlayingMetricTest {
 
     @Test
     public void testToJSONObject() throws Exception {
-
-        Log.d("TESTING", oddVideoPlayingMetric.getContentId());
-        Log.d("TESTING", oddVideoPlayingMetric.toString());
         String expected = "{\"data\": {" +
                 "type: \"" + oddVideoPlayingMetric.getType() + "\"," +
                 "attributes: {" +
                 "action: \"" + oddVideoPlayingMetric.getAction() + "\"," +
                 "contentType: \"" + oddVideoPlayingMetric.getContentType() + "\"," +
                 "contentId: \"" + oddVideoPlayingMetric.getContentId() + "\"," +
-                "title: \"" + oddVideoPlayingMetric.getTitle() + "\"," +
+                "contentTitle: \"" + oddVideoPlayingMetric.getTitle() + "\"," +
                 "elapsed: " + elapsed + "," +
                 "duration: " + duration + "," +
+                "sessionId: " + oddVideoPlayingMetric.getSessionId() + "," +
+                "videoSessionId: " + oddVideoPlayingMetric.getVideoSessionId() + "," +
                 "viewer: \"" + oddVideoPlayingMetric.getViewerId() + "\"" +
                 "}" +
                 "}}";

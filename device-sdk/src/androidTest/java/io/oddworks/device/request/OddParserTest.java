@@ -77,7 +77,7 @@ public class OddParserTest {
         OddImage image = display.getImages().iterator().next();
         assertThat(image.getUrl(), is("https://assets.oddnetworks.com/paul.svg"));
         assertThat(image.getLabel(), is("logo"));
-        assertThat(image.getMimeType(), is("image/svg+xml"));
+        assertThat(image.getMimeType().getMimeType(), is("image/svg+xml"));
         assertThat(image.getWidth(), is(0));
         assertThat(image.getHeight(), is(0));
         // - Colors

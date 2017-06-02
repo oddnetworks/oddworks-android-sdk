@@ -1,5 +1,7 @@
 package io.oddworks.device.metric;
 
+import android.content.Context;
+import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Before;
@@ -17,10 +19,16 @@ public class OddVideoStopMetricTest {
     private int elapsed = 456;
     private int duration = 1234;
     private OddVideoStopMetric oddVideoStopMetric;
+    private Context ctx;
+    private String sessionId;
+    private String videoSessionId;
 
     @Before
     public void beforeEach() {
-        oddVideoStopMetric = new OddVideoStopMetric(contentType, contentId, title, null, elapsed, duration);
+        sessionId = "foobarbaz";
+        videoSessionId = "buzz";
+        ctx = InstrumentationRegistry.getTargetContext();
+        oddVideoStopMetric = new OddVideoStopMetric(ctx, contentType, contentId, sessionId, videoSessionId, title, null, elapsed, duration);
     }
 
     @Test
@@ -30,7 +38,7 @@ public class OddVideoStopMetricTest {
 
     @Test
     public void testGetAction() throws Exception {
-        assertEquals(OddMetric.Companion.getACTION_VIDEO_STOP(), oddVideoStopMetric.getAction());
+        assertEquals(OddMetric.Type.VIDEO_STOP.getAction(), oddVideoStopMetric.getAction());
     }
 
     @Test
@@ -57,7 +65,9 @@ public class OddVideoStopMetricTest {
                 "action: \"" + oddVideoStopMetric.getAction() + "\"," +
                 "contentType: \"" + oddVideoStopMetric.getContentType() + "\"," +
                 "contentId: \"" + oddVideoStopMetric.getContentId() + "\"," +
-                "title: \"" + oddVideoStopMetric.getTitle() + "\"," +
+                "contentTitle: \"" + oddVideoStopMetric.getTitle() + "\"," +
+                "sessionId: \"" + oddVideoStopMetric.getSessionId() + "\"," +
+                "videoSessionId: \"" + oddVideoStopMetric.getVideoSessionId() + "\"," +
                 "elapsed: " + elapsed + "," +
                 "duration: " + duration + "," +
                 "viewer: \"" + oddVideoStopMetric.getViewerId() + "\"" +
