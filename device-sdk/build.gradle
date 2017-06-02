@@ -17,7 +17,7 @@ ext {
     siteUrl = 'http://android.guide.oddnetworks.com'
     gitUrl = 'https://github.com/oddnetworks/OddworksDeviceSDK'
 
-    libraryVersion = '3.0.0'
+    libraryVersion = '3.0.1'
 
     developerId = 'brkattk'
     developerName = 'Erik Straub, Dan Pallas'
@@ -73,7 +73,7 @@ install {
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "24.0.3"
+    buildToolsVersion '25.0.2'
 
     defaultConfig {
         minSdkVersion 16
@@ -107,7 +107,7 @@ android {
     }
 }
 
-def android_support_version = "25.0.1"
+def android_support_version = "25.3.1"
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
