@@ -13,7 +13,8 @@ data class OddImage (val url: String,
         GIF("image/gif", listOf(".gif")),
         JPEG("image/jpeg", listOf(".jpg")),
         PNG("image/png", listOf(".png")),
-        WEBP("image/webp", listOf(".webp"));
+        WEBP("image/webp", listOf(".webp")),
+        SVG("image/svg+xml", listOf(".svg"));
 
         companion object {
             fun valueFromMimeType(mimeType: String) : MimeType? {
@@ -23,6 +24,7 @@ data class OddImage (val url: String,
                     "image/jpeg", "image/jpg" -> JPEG
                     "image/png" -> PNG
                     "image/webp" -> WEBP
+                    "image/svg+xml" -> SVG
                     else -> {
                         Log.w(MimeType::class.java.simpleName, "Unknown MimeType $mimeType")
                         null
