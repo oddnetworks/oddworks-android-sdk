@@ -5,12 +5,14 @@ import android.accounts.AccountAuthenticatorActivity
 import android.accounts.AccountManager
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
+import android.widget.ImageView
 import io.oddworks.device.R
 import io.oddworks.device.exception.BadResponseCodeException
 import io.oddworks.device.model.OddViewer
@@ -42,6 +44,14 @@ class OddAuthenticationActivity : AccountAuthenticatorActivity() {
                 return@setOnEditorActionListener true
             }
             false
+        }
+        val authLogoIdentifier = resources.getIdentifier("oddworks_authentication_logo", "drawable", packageName)
+        if (authLogoIdentifier > 0) {
+            (findViewById(R.id.odd_authentication_logo) as ImageView).let {
+                it.visibility = View.VISIBLE
+                it.setImageDrawable(ContextCompat.getDrawable(this, authLogoIdentifier))
+                it.requestLayout()
+            }
         }
     }
 

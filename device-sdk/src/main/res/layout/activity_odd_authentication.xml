@@ -3,6 +3,13 @@
               android:id="@+id/activity_odd_authentication"
               style="@style/OddAuthenticationTheme.LinearLayout"
               tools:context="io.oddworks.device.authentication.OddAuthenticationActivity">
+
+    <ImageView
+        android:id="@+id/odd_authentication_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
     <TextView
         android:id="@+id/odd_authentication_message"
         style="@style/OddAuthenticationTheme.MessageTextView"/>
