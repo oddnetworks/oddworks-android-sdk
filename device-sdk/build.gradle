@@ -15,7 +15,7 @@ ext {
     libraryDescription = 'Oddworks Device SDK for Android'
 
     siteUrl = 'http://android.guide.oddnetworks.com'
-    gitUrl = 'https://github.com/oddnetworks/OddworksDeviceSDK'
+    gitUrl = 'https://github.com/oddnetworks/oddworks-android-sdk'
 
     libraryVersion = '3.0.1'
 
@@ -63,7 +63,6 @@ install {
                     connection gitUrl
                     developerConnection gitUrl
                     url siteUrl
-
                 }
             }
         }
@@ -168,7 +167,7 @@ bintray {
         repo = bintrayRepo
         name = bintrayName
         desc = libraryDescription
-        userOrg = 'oddnetworks'
+        userOrg = 'odd-networks'
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         licenses = allLicenses
