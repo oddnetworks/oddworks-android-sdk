@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int PERMISSIONS_GET_ACCOUNTS = 0;
 
+    private static final String SESSION_ID = "1234567890";
+
     private Context ctx = this;
     private AccountManager accountManager = null;
     private Account account = null;
@@ -77,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                 homepageId = config.getViews().get("homepage");
                 splashId = config.getViews().get("splash");
 
-                OddAppInitMetric initMetric = new OddAppInitMetric();
+                OddAppInitMetric initMetric = new OddAppInitMetric(getApplicationContext(), null, null, SESSION_ID, null);
 
                 OddRxBus.publish(initMetric);
 
@@ -156,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
                         OddCollection collection1 = (OddCollection) featured.iterator().next();
 
 
-                        OddViewLoadMetric viewLoadMetric = new OddViewLoadMetric("view", oddView.getId(), oddView.getTitle(), null);
+                        OddViewLoadMetric viewLoadMetric = new OddViewLoadMetric(getApplicationContext(), "view", oddView.getId(), SESSION_ID, oddView.getTitle(), null);
                         OddRxBus.publish(viewLoadMetric);
 
                         Log.d(TAG, "getView success: promotion " + promotion.getTitle() + " collection: " + collection1.getTitle());
