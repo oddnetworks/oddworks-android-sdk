@@ -25,6 +25,7 @@ import java.util.LinkedHashSet;
 
 import io.oddworks.device.authentication.OddAuthenticator;
 import io.oddworks.device.exception.BadResponseCodeException;
+import io.oddworks.device.local.WatchList;
 import io.oddworks.device.metric.OddAppInitMetric;
 import io.oddworks.device.metric.OddViewLoadMetric;
 import io.oddworks.device.model.OddCollection;
@@ -37,7 +38,7 @@ import io.oddworks.device.model.OddView;
 import io.oddworks.device.model.common.OddIdentifier;
 import io.oddworks.device.model.common.OddResource;
 import io.oddworks.device.model.common.OddResourceType;
-import io.oddworks.device.playstate.Progress;
+import io.oddworks.device.local.Progress;
 import io.oddworks.device.request.OddCallback;
 import io.oddworks.device.request.OddRequest;
 import io.oddworks.device.request.RxOddCall;
@@ -241,95 +242,111 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addToWatchlist(final OddResource resource) {
+        // record locally
+        new WatchList(this).add(resource.getId(), WatchList.Type.GENERAL);
+
         if (account == null) {
             Log.d(TAG, "addToWatchlist not called - no account");
+        } else {
+            // if there's an account, record on the server also
+            RxOddCall
+                    .observableFrom(new Action1<OddCallback<OddResource>>() {
+                        @Override
+                        public void call(OddCallback<OddResource> oddResourceOddCallback) {
+                            new OddRequest.Builder(ctx, OddResourceType.WATCHLIST)
+                                    .account(account)
+                                    .addResourceToWatchlist(account.name, resource)
+                                    .build()
+                                    .enqueueRequest(oddResourceOddCallback);
+                        }
+                    })
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Action1<OddResource>() {
+                        @Override
+                        public void call(OddResource oddResource) {
+                            Log.d(TAG, "addToWatchlist success: " + oddResource.getId());
+                        }
+                    }, new Action1<Throwable>() {
+                        @Override
+                        public void call(Throwable throwable) {
+                            handleRequestException("addToWatchlist", throwable);
+                        }
+                    });
         }
-        RxOddCall
-                .observableFrom(new Action1<OddCallback<OddResource>>() {
-                    @Override
-                    public void call(OddCallback<OddResource> oddResourceOddCallback) {
-                        new OddRequest.Builder(ctx, OddResourceType.WATCHLIST)
-                                .account(account)
-                                .addResourceToWatchlist(account.name, resource)
-                                .build()
-                                .enqueueRequest(oddResourceOddCallback);
-                    }
-                })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<OddResource>() {
-                    @Override
-                    public void call(OddResource oddResource) {
-                        Log.d(TAG, "addToWatchlist success: " + oddResource.getId());
-                    }
-                }, new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
-                        handleRequestException("addToWatchlist", throwable);
-                    }
-                });
     }
 
     private void recordProgress(final OddVideo resource) {
+        final long position = resource.getDuration() - 204;
+
+        // record locally
+        new Progress(this).setVideoProgress(resource.getId(), position);
+
         if (account == null) {
             Log.d(TAG, "recordProgress not called - no account");
+        } else {
+            // if there's an account, record on the server also
+            RxOddCall
+                    .observableFrom(new Action1<OddCallback<OddProgress>>() {
+                        @Override
+                        public void call(OddCallback<OddProgress> oddCallback) {
+                            new OddRequest.Builder(ctx, OddResourceType.PROGRESS)
+                                    .account(account)
+                                    .recordProgress(resource.getId(), (int) position, false)
+                                    .build()
+                                    .enqueueRequest(oddCallback);
+                        }
+                    })
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Action1<OddProgress>() {
+                        @Override
+                        public void call(OddProgress oddResource) {
+                            Log.d(TAG, "recordProgress success: " + oddResource.toJSONObject());
+                        }
+                    }, new Action1<Throwable>() {
+                        @Override
+                        public void call(Throwable throwable) {
+                            handleRequestException("recordProgress", throwable);
+                        }
+                    });
         }
-        final long position = resource.getDuration() - 204;
-        new Progress(this).setPosition(resource.getId(), position);
-        RxOddCall
-                .observableFrom(new Action1<OddCallback<OddProgress>>() {
-                    @Override
-                    public void call(OddCallback<OddProgress> oddCallback) {
-                        new OddRequest.Builder(ctx, OddResourceType.PROGRESS)
-                                .account(account)
-                                .recordProgress(resource.getId(), (int) position, false)
-                                .build()
-                                .enqueueRequest(oddCallback);
-                    }
-                })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<OddProgress>() {
-                    @Override
-                    public void call(OddProgress oddResource) {
-                        Log.d(TAG, "recordProgress success: " + oddResource.toJSONObject());
-                    }
-                }, new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
-                        handleRequestException("recordProgress", throwable);
-                    }
-                });
     }
 
     private void removeFromWatchlist(final OddResource resource) {
+        // remove locally
+        new WatchList(this).remove(resource.getId(), WatchList.Type.GENERAL);
+
+
         if (account == null) {
             Log.d(TAG, "removeFromWatchlist not called - no account");
+        } else {
+            // if there's an account, remove from the server also
+            RxOddCall
+                    .observableFrom(new Action1<OddCallback<OddResource>>() {
+                        @Override
+                        public void call(OddCallback<OddResource> oddResourceOddCallback) {
+                            new OddRequest.Builder(ctx, OddResourceType.WATCHLIST)
+                                    .account(account)
+                                    .removeResourceFromWatchlist(account.name, resource)
+                                    .build()
+                                    .enqueueRequest(oddResourceOddCallback);
+                        }
+                    })
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Action1<OddResource>() {
+                        @Override
+                        public void call(OddResource oddResource) {
+                            Log.d(TAG, "removeFromWatchlist success: " + oddResource.getId());
+                        }
+                    }, new Action1<Throwable>() {
+                        @Override
+                        public void call(Throwable throwable) {
+                            handleRequestException("removeFromWatchlist", throwable);
+                        }
+                    });
         }
-        RxOddCall
-                .observableFrom(new Action1<OddCallback<OddResource>>() {
-                    @Override
-                    public void call(OddCallback<OddResource> oddResourceOddCallback) {
-                        new OddRequest.Builder(ctx, OddResourceType.WATCHLIST)
-                                .account(account)
-                                .removeResourceFromWatchlist(account.name, resource)
-                                .build()
-                                .enqueueRequest(oddResourceOddCallback);
-                    }
-                })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<OddResource>() {
-                    @Override
-                    public void call(OddResource oddResource) {
-                        Log.d(TAG, "removeFromWatchlist success: " + oddResource.getId());
-                    }
-                }, new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
-                        handleRequestException("removeFromWatchlist", throwable);
-                    }
-                });
     }
 
     private void handleRequestException(String requestType, Throwable throwable) {
