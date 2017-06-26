@@ -1,39 +1,62 @@
-package io.oddworks.device.playstate
+package io.oddworks.device.local
 
 import android.content.Context
 import android.content.SharedPreferences
 
 class Progress(val context: Context) {
-    fun setPosition(id: String, position: Long) : Boolean {
-        return getPrefsEditor().putLong(id, position).commit()
+    fun setVideoProgress(id: String, position: Long) : Boolean {
+        return getPrefsEditor(VIDEO_PREFS_NAME).putLong(id, position).commit()
     }
 
-    fun getPosition(id: String) : Long {
-        val position = getPrefs().getLong(id, 0L)
-        return position
+    fun setCollectionProgress(id: String, entityId: String) : Boolean {
+        val prefs = getPrefs(COLLECTION_PREFS_NAME)
+        val progress = prefs.getStringSet(id, mutableSetOf())
+        progress.add(entityId)
+        return prefs.edit().putStringSet(id, progress).commit()
     }
 
-    fun getAll() : Map<String, *> {
-        return getPrefs().all
+    fun getVideoProgress(id: String) : Long {
+        return getPrefs(VIDEO_PREFS_NAME).getLong(id, 0L)
     }
 
-    fun clear(id: String) : Boolean {
-        return getPrefsEditor().remove(id).commit()
+    fun getCollectionProgress(id: String) : Set<String> {
+        return getPrefs(COLLECTION_PREFS_NAME).getStringSet(id, mutableSetOf())
     }
 
-    fun clearAll() : Boolean {
-        return getPrefsEditor().clear().commit()
+    fun getAllVideoProgress() : Map<String, *> {
+        return getPrefs(VIDEO_PREFS_NAME).all
     }
 
-    private fun getPrefs() : SharedPreferences {
-        return context.getSharedPreferences(PREFS_NAME, 0)
+    fun getAllCollectionProgress() : Map<String, *> {
+        return getPrefs(COLLECTION_PREFS_NAME).all
     }
 
-    private fun getPrefsEditor() : SharedPreferences.Editor {
-        return getPrefs().edit()
+    fun clearVideoProgress(id: String) : Boolean {
+        return getPrefsEditor(VIDEO_PREFS_NAME).remove(id).commit()
+    }
+
+    fun clearCollectionProgress(id: String) : Boolean {
+        return getPrefsEditor(COLLECTION_PREFS_NAME).remove(id).commit()
+    }
+
+    fun clearAllVideoProgress() : Boolean {
+        return getPrefsEditor(VIDEO_PREFS_NAME).clear().commit()
+    }
+
+    fun clearAllCollectionProgress() : Boolean {
+        return getPrefsEditor(COLLECTION_PREFS_NAME).clear().commit()
+    }
+
+    private fun getPrefs(prefsName: String) : SharedPreferences {
+        return context.getSharedPreferences(prefsName, 0)
+    }
+
+    private fun getPrefsEditor(prefsName: String) : SharedPreferences.Editor {
+        return getPrefs(prefsName).edit()
     }
 
     companion object {
-        private val PREFS_NAME = "Progress"
+        private val VIDEO_PREFS_NAME = "VideoProgress"
+        private val COLLECTION_PREFS_NAME = "CollectionProgress"
     }
 }
