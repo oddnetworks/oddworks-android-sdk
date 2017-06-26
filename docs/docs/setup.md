@@ -13,12 +13,6 @@
 or Gradle:
 
 ```
-repositories {
-    maven {
-        url 'http://oddnetworks.bintray.org/maven'
-    }
-}
-
 dependencies {
     compile 'io.oddworks:device-sdk:{version}'
 }
