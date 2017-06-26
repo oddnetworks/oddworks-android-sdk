@@ -37,6 +37,7 @@ import io.oddworks.device.model.OddView;
 import io.oddworks.device.model.common.OddIdentifier;
 import io.oddworks.device.model.common.OddResource;
 import io.oddworks.device.model.common.OddResourceType;
+import io.oddworks.device.playstate.Progress;
 import io.oddworks.device.request.OddCallback;
 import io.oddworks.device.request.OddRequest;
 import io.oddworks.device.request.RxOddCall;
@@ -273,13 +274,15 @@ public class MainActivity extends AppCompatActivity {
         if (account == null) {
             Log.d(TAG, "recordProgress not called - no account");
         }
+        final long position = resource.getDuration() - 204;
+        new Progress(this).setPosition(resource.getId(), position);
         RxOddCall
                 .observableFrom(new Action1<OddCallback<OddProgress>>() {
                     @Override
                     public void call(OddCallback<OddProgress> oddCallback) {
                         new OddRequest.Builder(ctx, OddResourceType.PROGRESS)
                                 .account(account)
-                                .recordProgress(resource.getId(), resource.getDuration() - 204, false)
+                                .recordProgress(resource.getId(), (int) position, false)
                                 .build()
                                 .enqueueRequest(oddCallback);
                     }
