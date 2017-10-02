@@ -3,6 +3,12 @@
     <!-- Base application theme. -->
     <style name="OddAuthenticationTheme" parent="@style/Theme.AppCompat.NoActionBar">
     </style>
+    <style name="OddAuthenticationTheme.Logo" parent="OddAuthenticationTheme">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:src">@android:color/transparent</item>
+        <item name="android:visibility">gone</item>
+    </style>
     <style name="OddAuthenticationTheme.LinearLayout" parent="OddAuthenticationTheme">
         <item name="android:paddingLeft">16dp</item>
         <item name="android:paddingRight">16dp</item>
