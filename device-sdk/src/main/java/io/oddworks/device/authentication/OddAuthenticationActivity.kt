@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.widget.TextView
-import android.widget.Toast
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
@@ -60,6 +59,7 @@ class OddAuthenticationActivity : AccountAuthenticatorActivity() {
         val password = (findViewById(R.id.odd_authentication_password) as TextView).text.toString()
         val accountType = intent.getStringExtra(ARG_ACCOUNT_TYPE)
 
+        hideFailure()
         showProgress()
 
         RxOddCall
@@ -96,7 +96,8 @@ class OddAuthenticationActivity : AccountAuthenticatorActivity() {
                             getString(R.string.oddworks_authentication_failed_no_detail)
                         }
                     }
-                    Toast.makeText(baseContext, message, Toast.LENGTH_SHORT).show()
+                    setFailureMessage(message)
+                    showFailure()
                     hideProgress()
                 })
     }
@@ -115,6 +116,21 @@ class OddAuthenticationActivity : AccountAuthenticatorActivity() {
 
         button.visibility = View.VISIBLE
         progress.visibility = View.GONE
+    }
+
+    private fun showFailure() {
+        val failure = findViewById(R.id.odd_authentication_failure_container)
+        failure.visibility = View.VISIBLE
+    }
+
+    private fun hideFailure() {
+        val failure = findViewById(R.id.odd_authentication_failure_container)
+        failure.visibility = View.GONE
+    }
+
+    private fun setFailureMessage(message: String) {
+        val failureMessage = (findViewById(R.id.odd_authentication_failure_message) as TextView)
+        failureMessage.text = message
     }
 
     private fun finishLogin(accountType: String, viewer: OddViewer) {

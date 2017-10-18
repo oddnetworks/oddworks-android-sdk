@@ -1,8 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:id="@+id/activity_odd_authentication"
-              style="@style/OddAuthenticationTheme.LinearLayout"
-              tools:context="io.oddworks.device.authentication.OddAuthenticationActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_odd_authentication"
+    style="@style/OddAuthenticationTheme.LinearLayout"
+    tools:context="io.oddworks.device.authentication.OddAuthenticationActivity">
 
     <ImageView
         android:id="@+id/odd_authentication_logo"
@@ -31,4 +32,17 @@
         android:id="@+id/odd_authentication_progress"
         style="@style/OddAuthenticationTheme.ProgressBar"
         tools:visibility="visible"/>
+
+    <LinearLayout
+        android:id="@+id/odd_authentication_failure_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        tools:visibility="visible">
+        <TextView
+            android:id="@+id/odd_authentication_failure_message"
+            style="@style/OddAuthenticationTheme.FailureTextView" />
+    </LinearLayout>
+
 </LinearLayout>

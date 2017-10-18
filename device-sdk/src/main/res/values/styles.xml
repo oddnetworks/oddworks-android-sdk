@@ -26,6 +26,14 @@
         <item name="android:padding">4dp</item>
         <item name="android:text">@string/account_message</item>
     </style>
+    <style name="OddAuthenticationTheme.FailureTextView" parent="OddAuthenticationTheme">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Caption</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:text">@string/oddworks_authentication_failed_no_detail</item>
+        <item name="android:textColor">@android:color/holo_red_dark</item>
+    </style>
     <style name="OddAuthenticationTheme.EditText" parent="@style/Widget.AppCompat.EditText">
     </style>
     <style name="OddAuthenticationTheme.EmailEditText" parent="OddAuthenticationTheme.EditText">
