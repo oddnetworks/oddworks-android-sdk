@@ -38,11 +38,12 @@ class OddAuthenticationActivity : AccountAuthenticatorActivity() {
             (findViewById(R.id.odd_authentication_email) as TextView).text = accountEmail
         }
         (findViewById(R.id.odd_authentication_password) as EditText).setOnEditorActionListener { textView, actionId, keyEvent ->
-            if (actionId == R.id.odd_authentication_sign_in || actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
                 submit(textView)
-                return@setOnEditorActionListener true
+                true
+            } else {
+                false
             }
-            false
         }
         val authLogoIdentifier = resources.getIdentifier("oddworks_authentication_logo", "drawable", packageName)
         if (authLogoIdentifier > 0) {
