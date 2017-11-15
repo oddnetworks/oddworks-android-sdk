@@ -3,13 +3,17 @@ package io.oddworks.device.authentication
 import android.accounts.Account
 import android.accounts.AccountAuthenticatorActivity
 import android.accounts.AccountManager
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.util.Log
+import android.view.KeyEvent
 import android.widget.TextView
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethod
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
 import io.oddworks.device.R
@@ -37,13 +41,16 @@ class OddAuthenticationActivity : AccountAuthenticatorActivity() {
         if (accountEmail != null) {
             (findViewById(R.id.odd_authentication_email) as TextView).text = accountEmail
         }
-        (findViewById(R.id.odd_authentication_password) as EditText).setOnEditorActionListener { textView, actionId, keyEvent ->
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
+        (findViewById(R.id.odd_authentication_password) as EditText).setOnEditorActionListener { textView, actionId, _ ->
+            if (actionId == R.integer.authImeActionId || actionId == EditorInfo.IME_NULL || actionId == EditorInfo.IME_ACTION_DONE) {
+                val inputManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+
+                inputManager.hideSoftInputFromWindow(textView.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
                 submit(textView)
-                true
-            } else {
-                false
+
+                return@setOnEditorActionListener true
             }
+            return@setOnEditorActionListener false
         }
         val authLogoIdentifier = resources.getIdentifier("oddworks_authentication_logo", "drawable", packageName)
         if (authLogoIdentifier > 0) {

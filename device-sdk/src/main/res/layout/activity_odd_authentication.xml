@@ -20,6 +20,8 @@
     <EditText
         android:id="@+id/odd_authentication_password"
         android:imeOptions="actionDone"
+        android:imeActionLabel="@string/action_sign_in"
+        android:imeActionId="@integer/authImeActionId"
         style="@style/OddAuthenticationTheme.PasswordEditText"/>
 
     <Button
