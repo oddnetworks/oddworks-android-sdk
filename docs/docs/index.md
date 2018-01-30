@@ -1,6 +1,6 @@
 # Oddworks SDK for Android
 
-Document version: June 26, 2017  
+Document version: January 30, 2018  
 SDK Version: [![Download](https://api.bintray.com/packages/oddnetworks/maven/device-sdk/images/download.svg)](https://bintray.com/odd-networks/maven/device-sdk/_latestVersion)
 
 The __device-sdk__ is the Oddworks SDK for Android. It is a wrapper for the Oddworks API that helps Android devices communicate with Oddworks.
