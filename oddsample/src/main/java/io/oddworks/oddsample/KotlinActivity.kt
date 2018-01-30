@@ -4,14 +4,13 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import io.oddworks.device.Oddworks
 import io.oddworks.device.model.OddCollection
 import io.oddworks.device.model.OddConfig
 import io.oddworks.device.model.OddView
 import io.oddworks.device.model.common.OddResourceType
 import io.oddworks.device.request.OddRequest
 import io.oddworks.device.request.RxOddCall
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
 
 class KotlinActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
@@ -29,8 +28,8 @@ class KotlinActivity: AppCompatActivity() {
                             .build()
                             .enqueueRequest(it)
                 }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Oddworks.ioScheduler())
+                .observeOn(Oddworks.mainScheduler())
                 .subscribe({
                     val viewId = it.views.get("crtv-home-view")!!
                     initializeHomeView(viewId)
@@ -48,8 +47,8 @@ class KotlinActivity: AppCompatActivity() {
                             .build()
                             .enqueueRequest(it)
                 }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Oddworks.ioScheduler())
+                .observeOn(Oddworks.mainScheduler())
                 .subscribe({
                     Log.d(KotlinActivity::class.java.simpleName, "view fetch success")
                     val personalities = it.getIncludedByRelationship("personalities")

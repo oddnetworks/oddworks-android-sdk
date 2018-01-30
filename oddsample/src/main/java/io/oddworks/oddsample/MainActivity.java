@@ -23,6 +23,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 
+import io.oddworks.device.Oddworks;
 import io.oddworks.device.authentication.OddAuthenticator;
 import io.oddworks.device.exception.BadResponseCodeException;
 import io.oddworks.device.local.WatchList;
@@ -43,9 +44,7 @@ import io.oddworks.device.request.OddCallback;
 import io.oddworks.device.request.OddRequest;
 import io.oddworks.device.request.RxOddCall;
 import io.oddworks.device.service.OddRxBus;
-import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
-import rx.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -148,8 +147,8 @@ public class MainActivity extends AppCompatActivity {
                                 .enqueueRequest(oddCallback);
                     }
                 })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Oddworks.ioScheduler())
+                .observeOn(Oddworks.mainScheduler())
                 .subscribe(new Action1<OddView>() {
                     @Override
                     public void call(OddView oddView) {
@@ -188,8 +187,8 @@ public class MainActivity extends AppCompatActivity {
                                 .enqueueRequest(oddCallback);
                     }
                 })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Oddworks.ioScheduler())
+                .observeOn(Oddworks.mainScheduler())
                 .subscribe(new Action1<LinkedHashSet<OddVideo>>() {
                     @Override
                     public void call(LinkedHashSet<OddVideo> videos) {
@@ -226,8 +225,8 @@ public class MainActivity extends AppCompatActivity {
                                 .enqueueRequest(oddCallback);
                     }
                 })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Oddworks.ioScheduler())
+                .observeOn(Oddworks.mainScheduler())
                 .subscribe(new Action1<LinkedHashSet<OddIdentifier>>() {
                     @Override
                     public void call(LinkedHashSet<OddIdentifier> identifiers) {
@@ -260,8 +259,8 @@ public class MainActivity extends AppCompatActivity {
                                     .enqueueRequest(oddResourceOddCallback);
                         }
                     })
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Oddworks.ioScheduler())
+                    .observeOn(Oddworks.mainScheduler())
                     .subscribe(new Action1<OddResource>() {
                         @Override
                         public void call(OddResource oddResource) {
@@ -297,8 +296,8 @@ public class MainActivity extends AppCompatActivity {
                                     .enqueueRequest(oddCallback);
                         }
                     })
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Oddworks.ioScheduler())
+                    .observeOn(Oddworks.mainScheduler())
                     .subscribe(new Action1<OddProgress>() {
                         @Override
                         public void call(OddProgress oddResource) {
@@ -333,8 +332,8 @@ public class MainActivity extends AppCompatActivity {
                                     .enqueueRequest(oddResourceOddCallback);
                         }
                     })
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Oddworks.ioScheduler())
+                    .observeOn(Oddworks.mainScheduler())
                     .subscribe(new Action1<OddResource>() {
                         @Override
                         public void call(OddResource oddResource) {

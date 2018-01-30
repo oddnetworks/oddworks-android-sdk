@@ -13,7 +13,7 @@ class OddAuthenticator(val context: Context) : AbstractAccountAuthenticator(cont
     override fun addAccount(response: AccountAuthenticatorResponse?, accountType: String?, authTokenType: String?, requiredFeatures: Array<out String>?, options: Bundle?): Bundle {
         Log.d(TAG, "addAccount")
         val accounts = AccountManager.get(context).getAccountsByType(context.getString(R.string.oddworks_account_type))
-        if (accounts.size > 0) {
+        if (accounts.isNotEmpty()) {
             val bundle = Bundle()
             bundle.putInt(AccountManager.KEY_ERROR_CODE, AccountManager.ERROR_CODE_REMOTE_EXCEPTION)
             bundle.putString(AccountManager.KEY_ERROR_MESSAGE, context.getString(R.string.oddworks_single_account_only))
@@ -102,7 +102,7 @@ class OddAuthenticator(val context: Context) : AbstractAccountAuthenticator(cont
     }
 
     companion object {
-        private val TAG = OddAuthenticator::class.java.simpleName
-        @JvmField val AUTH_TOKEN_TYPE_ODDWORKS_DEVICE = "Oddworks Device"
+        val TAG: String = OddAuthenticator::class.java.simpleName
+        const val AUTH_TOKEN_TYPE_ODDWORKS_DEVICE = "Oddworks Device"
     }
 }

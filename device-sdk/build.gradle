@@ -17,11 +17,11 @@ ext {
     siteUrl = 'http://android.guide.oddnetworks.com'
     gitUrl = 'https://github.com/oddnetworks/oddworks-android-sdk'
 
-    libraryVersion = '3.2.4'
+    libraryVersion = '3.3.1'
 
     developerId = 'brkattk'
-    developerName = 'Erik Straub, Dan Pallas'
-    developerEmail = 'erik.straub@oddnetworks.com, dan@madglory.com'
+    developerName = 'Erik Straub, Patrick McConnell, Dan Pallas'
+    developerEmail = 'erik.straub@oddnetworks.com, patrick.mcconnell@oddnetworks.com, dan@madglory.com'
 
     licenseName = 'The Apache Software License, Version 2.0'
     licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
@@ -106,21 +106,21 @@ android {
     }
 }
 
-def android_support_version = "25.3.1"
+def android_support_version = "25.4.0"
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
 
-    compile "com.android.support:appcompat-v7:$android_support_version"
-    compile 'com.squareup.okhttp:okhttp:2.7.5'
-    compile "com.android.support:support-annotations:$android_support_version"
-    compile "io.reactivex:rxandroid:1.2.1"
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "com.android.support:appcompat-v7:$android_support_version"
+    implementation 'com.squareup.okhttp:okhttp:2.7.5'
+    implementation "com.android.support:support-annotations:$android_support_version"
+    implementation "io.reactivex:rxandroid:1.2.1"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-    androidTestCompile 'com.android.support.test:runner:0.5'
-    androidTestCompile 'com.android.support.test:rules:0.5'
-    androidTestCompile 'org.skyscreamer:jsonassert:1.3.0'
-    androidTestCompile 'org.hamcrest:hamcrest-core:1.3'
+    androidTestImplementation 'com.android.support.test:runner:0.5'
+    androidTestImplementation 'com.android.support.test:rules:0.5'
+    androidTestImplementation 'org.skyscreamer:jsonassert:1.3.0'
+    androidTestImplementation 'org.hamcrest:hamcrest-core:1.3'
 }
 
 task sourcesJar(type: Jar) {

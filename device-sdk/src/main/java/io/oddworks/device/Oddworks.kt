@@ -5,20 +5,31 @@ import android.util.Log
 import io.oddworks.device.model.OddViewer
 import io.oddworks.device.model.common.OddRelationship
 import io.oddworks.device.model.common.OddResourceType
+import rx.Scheduler
+import rx.android.schedulers.AndroidSchedulers
+import rx.schedulers.Schedulers
 
 object Oddworks {
-    @JvmField val DEFAULT_API_BASE_URL = "https://content.oddworks.io/v2"
-    @JvmField val DEFAULT_ANALYTICS_API_BASE_URL = "https://analytics.oddworks.io"
+    const val DEFAULT_API_BASE_URL = "https://content.oddworks.io/v2"
+    const val DEFAULT_ANALYTICS_API_BASE_URL = "https://analytics.oddworks.io"
 
-    @JvmField val CONFIG_JWT_KEY = "io.oddworks.configJWT"
-    @JvmField val API_BASE_URL_KEY = "io.oddworks.apiBaseURL"
-    @JvmField val ANALYTICS_API_BASE_URL_KEY = "io.oddworks.analyticsApiBaseURL"
+    const val CONFIG_JWT_KEY = "io.oddworks.configJWT"
+    const val API_BASE_URL_KEY = "io.oddworks.apiBaseURL"
+    const val ANALYTICS_API_BASE_URL_KEY = "io.oddworks.analyticsApiBaseURL"
 
     private val AUTHORIZED_VIEWER_PREFERENCES = "${Oddworks::class.java.name}.AUTHORIZED_VIEWER_PREFERENCES"
     private val AUTHORIZED_VIEWER_ID = "${Oddworks::class.java.name}.AUTHORIZED_VIEWER_ID"
     private val AUTHORIZED_VIEWER_EMAIL = "${Oddworks::class.java.name}.AUTHORIZED_VIEWER_EMAIL"
     private val AUTHORIZED_VIEWER_ENTITLEMENTS = "${Oddworks::class.java.name}.AUTHORIZED_VIEWER_ENTITLEMENTS"
     private val AUTHORIZED_VIEWER_JWT = "${Oddworks::class.java.name}.AUTHORIZED_VIEWER_JWT"
+
+    @JvmStatic fun ioScheduler() : Scheduler {
+        return Schedulers.io()
+    }
+
+    @JvmStatic fun mainScheduler() : Scheduler {
+        return AndroidSchedulers.mainThread()
+    }
 
     @JvmStatic fun getStoredViewer(ctx: Context): OddViewer? {
         val prefs = ctx.getSharedPreferences(AUTHORIZED_VIEWER_PREFERENCES, Context.MODE_PRIVATE)
