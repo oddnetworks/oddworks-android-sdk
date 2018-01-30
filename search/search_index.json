@@ -1,0 +1,169 @@
+{
+    "docs": [
+        {
+            "location": "/", 
+            "text": "Oddworks SDK for Android\n\n\nDocument version: June 26, 2017\n\nSDK Version: \n\n\nThe \ndevice-sdk\n is the Oddworks SDK for Android. It is a wrapper for the Oddworks API that helps Android devices communicate with Oddworks.\n\n\nSDK API Documentation\n\n\n\n\n3.3.1\n (latest)\n\n\n3.2.1\n\n\n3.1.1\n\n\n3.0.0\n\n\n1.8.2\n\n\n1.8.0\n \n\n\n1.7.6\n \n\n\n1.6.0\n\n\n1.5.1\n\n\n1.4.1\n\n\n1.3.0\n\n\n1.2.1\n\n\n1.0.2\n\n\n\n\nFeatures\n\n\nThe Oddworks SDK for Android supports the following features:\n\n\n\n\nA wrapper for the Odd API that parses returned JSON into Java Objects\n\n\nA data store for objects received from the API\n\n\nA way to post metrics back to the API\n\n\n\n\nIntended Audience\n\n\nThis guide assumes that you have the necessary Java and Android development skills to work successfully with Oddworks for Android. You should know how to build and compile Android applications using Android Studio and the latest tools from the Android Developers Kit.", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/#oddworks-sdk-for-android", 
+            "text": "Document version: June 26, 2017 \nSDK Version:   The  device-sdk  is the Oddworks SDK for Android. It is a wrapper for the Oddworks API that helps Android devices communicate with Oddworks.", 
+            "title": "Oddworks SDK for Android"
+        }, 
+        {
+            "location": "/#sdk-api-documentation", 
+            "text": "3.3.1  (latest)  3.2.1  3.1.1  3.0.0  1.8.2  1.8.0    1.7.6    1.6.0  1.5.1  1.4.1  1.3.0  1.2.1  1.0.2", 
+            "title": "SDK API Documentation"
+        }, 
+        {
+            "location": "/#features", 
+            "text": "The Oddworks SDK for Android supports the following features:   A wrapper for the Odd API that parses returned JSON into Java Objects  A data store for objects received from the API  A way to post metrics back to the API", 
+            "title": "Features"
+        }, 
+        {
+            "location": "/#intended-audience", 
+            "text": "This guide assumes that you have the necessary Java and Android development skills to work successfully with Oddworks for Android. You should know how to build and compile Android applications using Android Studio and the latest tools from the Android Developers Kit.", 
+            "title": "Intended Audience"
+        }, 
+        {
+            "location": "/overview/", 
+            "text": "About Oddworks\n\n\nOddworks is, at its core, a Video Management System (VMS). It provides a central location to organize media and configure the devices that serve it.\n\n\nOddworks Device SDK\n\n\nAt a high level, this SDK wraps the Oddworks API with an OkHttp client, parsing the \nJSON API format\n into helpful \nOddResource\n objects.\n\n\nOddworks Resources\n\n\nOddworks has a handful of specific resource types that are used in concert to construct media applications. No matter which Online Video Provider (OVP) is used to provide media to Oddworks, the data will be massaged into one of these standardized objects. Our thought is that consumer applications should not need to change when adding a new OVP or changing where a video is stored.\n\n\nResource Types\n\n\nconfig\n\n\nThe \nconfig\n type will contain device-specific configuration data.\n\n\nvideo\n\n\nThe \nvideo\n resource is the main media object that is the meat and potatoes Odd Networks.\n\n\npromotion\n\n\nThe \npromotion\n resource type is an object that is essentially the same as a \nvideo\n without the stream. Essentially just image or text content.\n\n\ncollection\n\n\nA \ncollection\n resource is an object that contains other resources via its \nentities\n and \nfeatured\n relationships.\n\n\nview\n\n\nA \nview\n resource is an object that can contain other entities through user-defined custom relationships.\n\n\nData Classes\n\n\nThe SDKs data classes are modeled around parsing JSON API schema served by Oddworks. For more information about the REST API data models, visit \noddnetworks.com/docs/resources\n.\n\n\nOddIdentifier\n\n\nThis is the base class of an \nOddResource\n. It contains a resource's \nid\n and \ntype\n. It is a separate class so that we can pass around JSON API identifier objects in Java form.\n\n\nOddResource\n\n\nThe \nOddResource\n class extends \nOddIdentifier\n and is a superclass of many other data models in the SDK. It's children include \nOddView\n, \nOddCollection\n, \nOddVideo\n, \nOddConfig\n, \nOddViewer\n, and \nOddPromotion\n. It provides many convenience methods that help you sort through data received from the API such as \ngetRelationship\n, \ngetIncludedByRelationship\n, etc. These getter methods can return any combination of \nOddResource\n's subclass objects depending on how you've configured your data in the Oddworks dashboard.\n\n\nOddView\n\n\nThe \nOddView\n class makes it possible to retrieve and store large amounts of data from the API with a single call. This view contains \"relationships\" and \"included\" pieces of data that can be accessed via \nOddResource\n's convenience methods. When constructing applications you may find it helpful to package things such as your navigation and the initial data shown on application load into an \nOddView\n.\n\n\nOddCollection\n\n\nThe \nOddCollection\n class makes it possible to group together other entities for explicit display. Depending on how you configure your Collection on the Oddworks dashboard it can contain a description, images, a release date, a title, an ID, a related \nOddIdentifier\n objects, relationships, included \nOddResource\ns, and a type.\n\n\nOddVideo\n\n\nThe \nOddVideo\n class can represent any type of playable media to users. This could be a VOD, HLS Stream, DASH Stream, audio file, etc. Depending on how you configure your OddVideo on the Oddworks dashboard it can contain a description, a duration, images, a release date, a title, stream data, an ID, a related \nOddIdentifier\n object, relationships, included \nOddResource\ns (such as related videos), and a type.\n\n\nOddPromotion\n\n\nThe \nOddPromotion\n class is used to handle any type of non-media content you may want to put in the application. Depending on how you configure your OddPromotion on the Oddworks dashboard it can contain a description, a title, images, a related \nOddIdentifier\n object, relationships, included \nOddResource\ns, and a type.", 
+            "title": "Overview"
+        }, 
+        {
+            "location": "/overview/#about-oddworks", 
+            "text": "Oddworks is, at its core, a Video Management System (VMS). It provides a central location to organize media and configure the devices that serve it.", 
+            "title": "About Oddworks"
+        }, 
+        {
+            "location": "/overview/#oddworks-device-sdk", 
+            "text": "At a high level, this SDK wraps the Oddworks API with an OkHttp client, parsing the  JSON API format  into helpful  OddResource  objects.", 
+            "title": "Oddworks Device SDK"
+        }, 
+        {
+            "location": "/overview/#oddworks-resources", 
+            "text": "Oddworks has a handful of specific resource types that are used in concert to construct media applications. No matter which Online Video Provider (OVP) is used to provide media to Oddworks, the data will be massaged into one of these standardized objects. Our thought is that consumer applications should not need to change when adding a new OVP or changing where a video is stored.", 
+            "title": "Oddworks Resources"
+        }, 
+        {
+            "location": "/overview/#resource-types", 
+            "text": "", 
+            "title": "Resource Types"
+        }, 
+        {
+            "location": "/overview/#config", 
+            "text": "The  config  type will contain device-specific configuration data.", 
+            "title": "config"
+        }, 
+        {
+            "location": "/overview/#video", 
+            "text": "The  video  resource is the main media object that is the meat and potatoes Odd Networks.", 
+            "title": "video"
+        }, 
+        {
+            "location": "/overview/#promotion", 
+            "text": "The  promotion  resource type is an object that is essentially the same as a  video  without the stream. Essentially just image or text content.", 
+            "title": "promotion"
+        }, 
+        {
+            "location": "/overview/#collection", 
+            "text": "A  collection  resource is an object that contains other resources via its  entities  and  featured  relationships.", 
+            "title": "collection"
+        }, 
+        {
+            "location": "/overview/#view", 
+            "text": "A  view  resource is an object that can contain other entities through user-defined custom relationships.", 
+            "title": "view"
+        }, 
+        {
+            "location": "/overview/#data-classes", 
+            "text": "The SDKs data classes are modeled around parsing JSON API schema served by Oddworks. For more information about the REST API data models, visit  oddnetworks.com/docs/resources .", 
+            "title": "Data Classes"
+        }, 
+        {
+            "location": "/overview/#oddidentifier", 
+            "text": "This is the base class of an  OddResource . It contains a resource's  id  and  type . It is a separate class so that we can pass around JSON API identifier objects in Java form.", 
+            "title": "OddIdentifier"
+        }, 
+        {
+            "location": "/overview/#oddresource", 
+            "text": "The  OddResource  class extends  OddIdentifier  and is a superclass of many other data models in the SDK. It's children include  OddView ,  OddCollection ,  OddVideo ,  OddConfig ,  OddViewer , and  OddPromotion . It provides many convenience methods that help you sort through data received from the API such as  getRelationship ,  getIncludedByRelationship , etc. These getter methods can return any combination of  OddResource 's subclass objects depending on how you've configured your data in the Oddworks dashboard.", 
+            "title": "OddResource"
+        }, 
+        {
+            "location": "/overview/#oddview", 
+            "text": "The  OddView  class makes it possible to retrieve and store large amounts of data from the API with a single call. This view contains \"relationships\" and \"included\" pieces of data that can be accessed via  OddResource 's convenience methods. When constructing applications you may find it helpful to package things such as your navigation and the initial data shown on application load into an  OddView .", 
+            "title": "OddView"
+        }, 
+        {
+            "location": "/overview/#oddcollection", 
+            "text": "The  OddCollection  class makes it possible to group together other entities for explicit display. Depending on how you configure your Collection on the Oddworks dashboard it can contain a description, images, a release date, a title, an ID, a related  OddIdentifier  objects, relationships, included  OddResource s, and a type.", 
+            "title": "OddCollection"
+        }, 
+        {
+            "location": "/overview/#oddvideo", 
+            "text": "The  OddVideo  class can represent any type of playable media to users. This could be a VOD, HLS Stream, DASH Stream, audio file, etc. Depending on how you configure your OddVideo on the Oddworks dashboard it can contain a description, a duration, images, a release date, a title, stream data, an ID, a related  OddIdentifier  object, relationships, included  OddResource s (such as related videos), and a type.", 
+            "title": "OddVideo"
+        }, 
+        {
+            "location": "/overview/#oddpromotion", 
+            "text": "The  OddPromotion  class is used to handle any type of non-media content you may want to put in the application. Depending on how you configure your OddPromotion on the Oddworks dashboard it can contain a description, a title, images, a related  OddIdentifier  object, relationships, included  OddResource s, and a type.", 
+            "title": "OddPromotion"
+        }, 
+        {
+            "location": "/setup/", 
+            "text": "Download\n\n\n or grab via Maven:\n\n\ndependency\n\n  \ngroupId\nio.oddworks\n/groupId\n\n  \nartifactId\ndevice-sdk\n/artifactId\n\n  \nversion\n{version}\n/version\n\n\n/dependency\n\n\n\n\n\nor Gradle:\n\n\ndependencies {\n    compile 'io.oddworks:device-sdk:{version}'\n}\n\n\n\n\nConfigure\n\n\nYou will need to configure a few pieces of application meta-data in \nAndroidManifest.xml\n to get started.\n\n\nFirst, you will need to specify the device-specific JSON Web Token (JWT) given by Oddworks.\n\n\napplication\n\n    \nmeta-data\n        android:name=\nio.oddworks.configJWT\n\n        android:value=\nthe-device-specific-jwt-given-by-the-oddworks-server\n /\n\n\n/application\n\n\n\n\n\nThen, if you are using the enterprise Oddworks content service, you will need to add the \nio.oddworks.apiBaseURL\n meta-data. If you leave this out, the default endpoint will be used. See \nOddworks.DEFAULT_API_BASE_URL\n.\n\n\napplication\n\n    \nmeta-data\n        android:name=\nio.oddworks.configJWT\n\n        android:value=\nthe-device-specific-jwt-given-by-the-oddworks-server\n /\n\n    \nmeta-data\n        android:name=\nio.oddworks.apiBaseURL\n\n        android:value=\nhttps://path-to-your-oddworks.com/version\n /\n\n\n/application\n\n\n\n\n\nFinally, if you are using the enterprise Oddworks analytics service, you will need to add the \nio.oddworks.analyticsApiBaseURL\n meta-data. If you leave this out, the default endpoint will be used. See \nOddworks.DEFAULT_ANALYTICS_API_BASE_URL\n.\n\n\napplication\n\n    \nmeta-data\n        android:name=\nio.oddworks.configJWT\n\n        android:value=\nthe-device-specific-jwt-given-by-the-oddworks-server\n /\n\n    \nmeta-data\n        android:name=\nio.oddworks.apiBaseURL\n\n        android:value=\nhttps://path-to-your-oddworks-content-service.com/version\n /\n\n    \nmeta-data\n        android:name=\nio.oddworks.analyticsApiBaseURL\n\n        android:value=\nhttps://path-to-your-oddworks-analytics-service.com\n /\n\n\n/application", 
+            "title": "Setup"
+        }, 
+        {
+            "location": "/setup/#download", 
+            "text": "or grab via Maven:  dependency \n   groupId io.oddworks /groupId \n   artifactId device-sdk /artifactId \n   version {version} /version  /dependency   or Gradle:  dependencies {\n    compile 'io.oddworks:device-sdk:{version}'\n}", 
+            "title": "Download"
+        }, 
+        {
+            "location": "/setup/#configure", 
+            "text": "You will need to configure a few pieces of application meta-data in  AndroidManifest.xml  to get started.  First, you will need to specify the device-specific JSON Web Token (JWT) given by Oddworks.  application \n     meta-data\n        android:name= io.oddworks.configJWT \n        android:value= the-device-specific-jwt-given-by-the-oddworks-server  /  /application   Then, if you are using the enterprise Oddworks content service, you will need to add the  io.oddworks.apiBaseURL  meta-data. If you leave this out, the default endpoint will be used. See  Oddworks.DEFAULT_API_BASE_URL .  application \n     meta-data\n        android:name= io.oddworks.configJWT \n        android:value= the-device-specific-jwt-given-by-the-oddworks-server  / \n     meta-data\n        android:name= io.oddworks.apiBaseURL \n        android:value= https://path-to-your-oddworks.com/version  /  /application   Finally, if you are using the enterprise Oddworks analytics service, you will need to add the  io.oddworks.analyticsApiBaseURL  meta-data. If you leave this out, the default endpoint will be used. See  Oddworks.DEFAULT_ANALYTICS_API_BASE_URL .  application \n     meta-data\n        android:name= io.oddworks.configJWT \n        android:value= the-device-specific-jwt-given-by-the-oddworks-server  / \n     meta-data\n        android:name= io.oddworks.apiBaseURL \n        android:value= https://path-to-your-oddworks-content-service.com/version  / \n     meta-data\n        android:name= io.oddworks.analyticsApiBaseURL \n        android:value= https://path-to-your-oddworks-analytics-service.com  /  /application", 
+            "title": "Configure"
+        }, 
+        {
+            "location": "/requests/", 
+            "text": "We need to build an \nOddRequest\n and enqueue it, passing along an \nOddCallback\n.\n\n\nOddRequest.Builder\n can be used to do this. Minimally, pass the current application context and an \nOddResourceType\n\n\n// Create the OddCallback instance\nOddCallback\nOddConfig\n configCallback = new OddCallback\nOddConfig\n() {\n    @Override\n    public void onSuccess(OddConfig resource) {\n        // do what you need to do with the OddConfig resource\n        Log.d(TAG, \nrequest successful - id: \n + resource.getIdentifier().getId());\n    }\n\n    @Override\n    public void onFailure(@NotNull Exception exception) {\n        Log.e(TAG, \nrequest failed\n, exception);\n\n        // if non 200 status code, Exception will be a BadResponseCodeException\n        if (exception instanceof BadResponseCodeException) {\n            // Useful for determining cause of bad response\n            LinkedHashSet\nOddError\n errors = ((BadResponseCodeException) exception).oddErrors;\n            Log.d(TAG, \nparsed server errors: \n + errors);\n        }\n    }\n};\n\n// Create the OddRequest instance\nOddRequest request = new OddRequest.Builder(context, OddResourceType.CONFIG).build();\n\n// Build and enqueue the OkHttp.Call using OddRequest and OddCallback\nrequest.enqueueRequest(configCallback);\n\n\n\n\nYou can also wrap this in an \nRxOddCall\n if you are into \nRxJava\n\n\nRxOddCall\n    .observableFrom(new Action1\nOddCallback\nOddConfig\n() {\n        @Override\n        public void call(OddCallback\nOddConfig\n oddCallback) {\n            new OddRequest.Builder(context, OddResourceType.CONFIG)\n                    .build()\n                    .enqueueRequest(oddCallback);\n        }\n    })\n    .subscribeOn(Schedulers.io())\n    .observeOn(AndroidSchedulers.mainThread())\n    .subscribe(new Action1\nOddConfig\n() {\n        @Override\n        public void call(OddConfig oddConfig) {\n            // do what you need to do with the OddConfig resource\n            Log.d(TAG, \nrequest successful - id: \n + resource.getIdentifier().getId());\n        }\n    }, new Action1\nThrowable\n() {\n        @Override\n        public void call(Throwable throwable) {\n            Log.e(TAG, \nrequest failed\n, throwable);\n\n            // if non 200 status code, Throwable will be a BadResponseCodeException\n            if (throwable instanceof BadResponseCodeException) {\n                // Useful for determining cause of bad response\n                LinkedHashSet\nOddError\n errors = ((BadResponseCodeException) throwable).oddErrors;\n                Log.d(TAG, \nparsed server errors: \n + errors);\n            }\n        }\n    });", 
+            "title": "Requests"
+        }, 
+        {
+            "location": "/authentication/", 
+            "text": "This SDK offers an \nOddAuthenticator\n service that can be configured to handle authentication via Oddworks.\n\n\nAn authentication workflow can also be manually created via \nOddRequest.Builder\n.\n\n\nOddAuthenticatorService\n\n\nStep 1:\n \nAndroidManifest.xml\n\n\nTo utilize OddAuthenticatorService, you must first declare it within the \napplication\n block of \nAndroidManifest.xml\n\n\napplication\n\n  \nactivity android:name=\nio.oddworks.device.authentication.OddAuthenticationActivity\n \n              android:label=\n@string/login_label\n /\n\n  \nservice android:name=\nio.oddworks.device.authentication.OddAuthenticatorService\n\n      \nintent-filter\n\n          \naction android:name=\nandroid.accounts.AccountAuthenticator\n /\n\n      \n/intent-filter\n\n      \nmeta-data android:name=\nandroid.accounts.AccountAuthenticator\n\n                       android:resource=\n@xml/oddworks_authenticator\n /\n\n  \n/service\n\n\n/application\n\n\n\n\n\nThere are also some permissions needed. Depending upon the SDK level you are targeting, you may need to request these permissions at runtime.\n\n\nuses-permission android:name=\nandroid.permission.USE_CREDENTIALS\n/\n\n\nuses-permission android:name=\nandroid.permission.GET_ACCOUNTS\n/\n\n\nuses-permission android:name=\nandroid.permission.MANAGE_ACCOUNTS\n/\n\n\n\nuses-permission android:name=\nandroid.permission.INTERNET\n /\n\n\nuses-permission android:name=\nandroid.permission.AUTHENTICATE_ACCOUNTS\n /\n\n\n\n\n\nStep 2:\n \nres/strings.xml\n\n\nNext, you should override a few strings in your application's \nres/strings.xml\n file.\n\n\n\n\n@string/oddworks_account_type\n - This should be a string that is unique to your application and will distinguish your Accounts from others on the device.\n\n\n@string/oddworks_account_label\n - This will be the label displayed when listing the device's Accounts.\n\n\n\n\n\n\nStep 3:\n \nres/mipmap/ic_launcher.png|xml\n\n\nBe sure that you have an \nic_launcher\n icon set in your application's \nres/mipmap\n directory(ies). This will be the icon displayed when listing the device's Accounts.\n\n\nOddAuthenticationActivity\n\n\nWhen creating a new Account with OddAuthenticationService, an OddAuthenticationActivity is started, which you will need to declare this activity within your \nAndroidManifest.xml\n:\n\n\n\n\nThis view is highly customizable and can be done so by overriding the following styles:\n\n\nstyle name=\nOddAuthenticationTheme\n parent=\n@style/Theme.AppCompat.NoActionBar\n\n\nstyle name=\nOddAuthenticationTheme.LinearLayout\n parent=\nOddAuthenticationTheme\n\n\nstyle name=\nOddAuthenticationTheme.MessageTextView\n parent=\nOddAuthenticationTheme\n\n\nstyle name=\nOddAuthenticationTheme.EditText\n parent=\n@style/Widget.AppCompat.EditText\n\n\nstyle name=\nOddAuthenticationTheme.EmailEditText\n parent=\nOddAuthenticationTheme.EditText\n\n\nstyle name=\nOddAuthenticationTheme.PasswordEditText\n parent=\nOddAuthenticationTheme.EditText\n\n\nstyle name=\nOddAuthenticationTheme.Button\n parent=\n@style/Widget.AppCompat.Button.Colored\n\n\nstyle name=\nOddAuthenticationTheme.ProgressBar\n parent=\n@style/Widget.AppCompat.ProgressBar\n\n\n\n\n\nHandling Accounts\n\n\nUltimately, how you choose to handle your Account(s) is up to you.\n\n\nAuthenticating an OddRequest with an Account can be done using the \nOddRequest.Builder\n function \naccount(Account)\n.\n\n\nIf the Account's \nauthToken\n is valid, it will be used to make the request.\n\n\nIf the Account's \nauthToken\n is invalid or missing, the user will be prompted to re-authenticate.\n\n\nIf the Authenticated request responds with a \n401\n code, the Account is removed.", 
+            "title": "Authentication"
+        }, 
+        {
+            "location": "/authentication/#oddauthenticatorservice", 
+            "text": "Step 1:   AndroidManifest.xml  To utilize OddAuthenticatorService, you must first declare it within the  application  block of  AndroidManifest.xml  application \n   activity android:name= io.oddworks.device.authentication.OddAuthenticationActivity  \n              android:label= @string/login_label  / \n   service android:name= io.oddworks.device.authentication.OddAuthenticatorService \n       intent-filter \n           action android:name= android.accounts.AccountAuthenticator  / \n       /intent-filter \n       meta-data android:name= android.accounts.AccountAuthenticator \n                       android:resource= @xml/oddworks_authenticator  / \n   /service  /application   There are also some permissions needed. Depending upon the SDK level you are targeting, you may need to request these permissions at runtime.  uses-permission android:name= android.permission.USE_CREDENTIALS /  uses-permission android:name= android.permission.GET_ACCOUNTS /  uses-permission android:name= android.permission.MANAGE_ACCOUNTS /  uses-permission android:name= android.permission.INTERNET  /  uses-permission android:name= android.permission.AUTHENTICATE_ACCOUNTS  /   Step 2:   res/strings.xml  Next, you should override a few strings in your application's  res/strings.xml  file.   @string/oddworks_account_type  - This should be a string that is unique to your application and will distinguish your Accounts from others on the device.  @string/oddworks_account_label  - This will be the label displayed when listing the device's Accounts.    Step 3:   res/mipmap/ic_launcher.png|xml  Be sure that you have an  ic_launcher  icon set in your application's  res/mipmap  directory(ies). This will be the icon displayed when listing the device's Accounts.", 
+            "title": "OddAuthenticatorService"
+        }, 
+        {
+            "location": "/authentication/#oddauthenticationactivity", 
+            "text": "When creating a new Account with OddAuthenticationService, an OddAuthenticationActivity is started, which you will need to declare this activity within your  AndroidManifest.xml :   This view is highly customizable and can be done so by overriding the following styles:  style name= OddAuthenticationTheme  parent= @style/Theme.AppCompat.NoActionBar  style name= OddAuthenticationTheme.LinearLayout  parent= OddAuthenticationTheme  style name= OddAuthenticationTheme.MessageTextView  parent= OddAuthenticationTheme  style name= OddAuthenticationTheme.EditText  parent= @style/Widget.AppCompat.EditText  style name= OddAuthenticationTheme.EmailEditText  parent= OddAuthenticationTheme.EditText  style name= OddAuthenticationTheme.PasswordEditText  parent= OddAuthenticationTheme.EditText  style name= OddAuthenticationTheme.Button  parent= @style/Widget.AppCompat.Button.Colored  style name= OddAuthenticationTheme.ProgressBar  parent= @style/Widget.AppCompat.ProgressBar", 
+            "title": "OddAuthenticationActivity"
+        }, 
+        {
+            "location": "/authentication/#handling-accounts", 
+            "text": "Ultimately, how you choose to handle your Account(s) is up to you.  Authenticating an OddRequest with an Account can be done using the  OddRequest.Builder  function  account(Account) .  If the Account's  authToken  is valid, it will be used to make the request.  If the Account's  authToken  is invalid or missing, the user will be prompted to re-authenticate.  If the Authenticated request responds with a  401  code, the Account is removed.", 
+            "title": "Handling Accounts"
+        }, 
+        {
+            "location": "/analytics/", 
+            "text": "There are two ways of sending analytics metrics.\n\n\nSending OddMetric requests manually\n\n\nNote: Be careful about making requests on the main thread.\n\n\n// from within your activity\n\nOddCallback\nOddMetric\n metricCallback = new OddCallback\nOddMetric\n() {\n    @Override\n    public void onSuccess(OddMetric resource) {\n        Log.d(TAG, \nhandleOddMetric: SUCCESS $resource}\n)\n    }\n\n    @Override\n    public void onFailure(@NotNull Exception exception) {\n        Log.d(TAG, \nhandleOddMetric: FAILURE $exception\n)\n        if (exception is BadResponseCodeException) {\n            Log.d(TAG, \nhandleOddMetric code: ${exception.code} errors: ${exception.oddErrors}\n)\n        }\n    }\n};\n\nOddRequest.Builder(context, OddResourceType.EVENT)\n                        .event(event)\n                        .build()\n                        .enqueueRequest(oddMetricCallback)\n\n\n\n\nSending OddMetric requests via the OddRxBus\n\n\nYou will first need to enable the OddMetricHandler. A good place to do this is in your Application class.\n\n\n\npublic class YourApp extends Application {\n  @Override\n  public void onCreate() {\n      super.onCreate();\n\n      // Enable handling of published analytics events\n      OddMetricHandler.enable(this);\n  }\n}\n\n\n\n\nUsing the OddMetricHandler ensures the POST requests are sent on an IO Scheduler thread.\n\n\nNext, when you are ready to enqueue an OddMetric request, simply use the \nOddRxBus.publish()\n function.\n\n\n\n// from within an activity\nOddAppInitMetric metric = new OddAppInitMetric();\n\nOddRxBus.publish(metric);", 
+            "title": "Analytics"
+        }, 
+        {
+            "location": "/analytics/#sending-oddmetric-requests-manually", 
+            "text": "Note: Be careful about making requests on the main thread.  // from within your activity\n\nOddCallback OddMetric  metricCallback = new OddCallback OddMetric () {\n    @Override\n    public void onSuccess(OddMetric resource) {\n        Log.d(TAG,  handleOddMetric: SUCCESS $resource} )\n    }\n\n    @Override\n    public void onFailure(@NotNull Exception exception) {\n        Log.d(TAG,  handleOddMetric: FAILURE $exception )\n        if (exception is BadResponseCodeException) {\n            Log.d(TAG,  handleOddMetric code: ${exception.code} errors: ${exception.oddErrors} )\n        }\n    }\n};\n\nOddRequest.Builder(context, OddResourceType.EVENT)\n                        .event(event)\n                        .build()\n                        .enqueueRequest(oddMetricCallback)", 
+            "title": "Sending OddMetric requests manually"
+        }, 
+        {
+            "location": "/analytics/#sending-oddmetric-requests-via-the-oddrxbus", 
+            "text": "You will first need to enable the OddMetricHandler. A good place to do this is in your Application class.  \npublic class YourApp extends Application {\n  @Override\n  public void onCreate() {\n      super.onCreate();\n\n      // Enable handling of published analytics events\n      OddMetricHandler.enable(this);\n  }\n}  Using the OddMetricHandler ensures the POST requests are sent on an IO Scheduler thread.  Next, when you are ready to enqueue an OddMetric request, simply use the  OddRxBus.publish()  function.  \n// from within an activity\nOddAppInitMetric metric = new OddAppInitMetric();\n\nOddRxBus.publish(metric);", 
+            "title": "Sending OddMetric requests via the OddRxBus"
+        }
+    ]
+}
