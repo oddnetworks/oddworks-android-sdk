@@ -400,14 +400,19 @@ object OddParser {
     }
 
     private fun parseFeatures(rawAttributes: JSONObject?): Features {
+        val nullFeatures = Features(Authentication(false, Authentication.AuthenticationType.DISABLED),
+                Sharing(false),
+                emptySet(), false,
+                VideoTermination(false, 0))
+
         if (rawAttributes == null) {
-            return Features(Authentication(false, Authentication.AuthenticationType.DISABLED), Sharing(false), emptySet(), false)
+            return nullFeatures
         }
-        val rawFeatures = SafeJSONParser.getJSONObject(rawAttributes, "features", false) ?: return Features(Authentication(false, Authentication.AuthenticationType.DISABLED), Sharing(false), emptySet(), false)
+        val rawFeatures = SafeJSONParser.getJSONObject(rawAttributes, "features", false) ?: return nullFeatures
 
         val metricsConfig = parseMetricsFeature(rawFeatures)
 
-        return Features(parseAuthenticationFeature(rawFeatures), parseSharingFeature(rawFeatures), metricsConfig.first, metricsConfig.second)
+        return Features(parseAuthenticationFeature(rawFeatures), parseSharingFeature(rawFeatures), metricsConfig.first, metricsConfig.second, parseVideoTerminationFeature(rawFeatures))
     }
 
     @Throws(JSONException::class, IllegalArgumentException::class)
@@ -476,10 +481,23 @@ object OddParser {
     }
 
     @Throws(JSONException::class)
+    private fun parseVideoTerminationFeature(rawFeatures: JSONObject): VideoTermination {
+        val rawVideoTermination= SafeJSONParser.getJSONObject(rawFeatures, "videoTermination", false) ?: return VideoTermination(false, 0)
+        return parseVideoTermination(rawVideoTermination)
+    }
+
+    @Throws(JSONException::class)
     private fun parseSharing(rawSharing: JSONObject): Sharing {
         val enabled = SafeJSONParser.getBoolean(rawSharing, "enabled")
         val text = SafeJSONParser.getString(rawSharing, "text") ?: ""
         return Sharing(enabled, text)
+    }
+
+    @Throws(JSONException::class)
+    private fun parseVideoTermination(rawVideoTermination: JSONObject): VideoTermination {
+        val enabled = SafeJSONParser.getBoolean(rawVideoTermination, "enabled")
+        val minutes = SafeJSONParser.getInt(rawVideoTermination, "minutes")
+        return VideoTermination(enabled, minutes)
     }
 
     @Throws(JSONException::class)
