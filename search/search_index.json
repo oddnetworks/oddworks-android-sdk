@@ -2,12 +2,12 @@
     "docs": [
         {
             "location": "/", 
-            "text": "Oddworks SDK for Android\n\n\nDocument version: June 26, 2017\n\nSDK Version: \n\n\nThe \ndevice-sdk\n is the Oddworks SDK for Android. It is a wrapper for the Oddworks API that helps Android devices communicate with Oddworks.\n\n\nSDK API Documentation\n\n\n\n\n3.3.1\n (latest)\n\n\n3.2.1\n\n\n3.1.1\n\n\n3.0.0\n\n\n1.8.2\n\n\n1.8.0\n \n\n\n1.7.6\n \n\n\n1.6.0\n\n\n1.5.1\n\n\n1.4.1\n\n\n1.3.0\n\n\n1.2.1\n\n\n1.0.2\n\n\n\n\nFeatures\n\n\nThe Oddworks SDK for Android supports the following features:\n\n\n\n\nA wrapper for the Odd API that parses returned JSON into Java Objects\n\n\nA data store for objects received from the API\n\n\nA way to post metrics back to the API\n\n\n\n\nIntended Audience\n\n\nThis guide assumes that you have the necessary Java and Android development skills to work successfully with Oddworks for Android. You should know how to build and compile Android applications using Android Studio and the latest tools from the Android Developers Kit.", 
+            "text": "Oddworks SDK for Android\n\n\nDocument version: January 30, 2018\n\nSDK Version: \n\n\nThe \ndevice-sdk\n is the Oddworks SDK for Android. It is a wrapper for the Oddworks API that helps Android devices communicate with Oddworks.\n\n\nSDK API Documentation\n\n\n\n\n3.3.1\n (latest)\n\n\n3.2.1\n\n\n3.1.1\n\n\n3.0.0\n\n\n1.8.2\n\n\n1.8.0\n \n\n\n1.7.6\n \n\n\n1.6.0\n\n\n1.5.1\n\n\n1.4.1\n\n\n1.3.0\n\n\n1.2.1\n\n\n1.0.2\n\n\n\n\nFeatures\n\n\nThe Oddworks SDK for Android supports the following features:\n\n\n\n\nA wrapper for the Odd API that parses returned JSON into Java Objects\n\n\nA data store for objects received from the API\n\n\nA way to post metrics back to the API\n\n\n\n\nIntended Audience\n\n\nThis guide assumes that you have the necessary Java and Android development skills to work successfully with Oddworks for Android. You should know how to build and compile Android applications using Android Studio and the latest tools from the Android Developers Kit.", 
             "title": "Introduction"
         }, 
         {
             "location": "/#oddworks-sdk-for-android", 
-            "text": "Document version: June 26, 2017 \nSDK Version:   The  device-sdk  is the Oddworks SDK for Android. It is a wrapper for the Oddworks API that helps Android devices communicate with Oddworks.", 
+            "text": "Document version: January 30, 2018 \nSDK Version:   The  device-sdk  is the Oddworks SDK for Android. It is a wrapper for the Oddworks API that helps Android devices communicate with Oddworks.", 
             "title": "Oddworks SDK for Android"
         }, 
         {
