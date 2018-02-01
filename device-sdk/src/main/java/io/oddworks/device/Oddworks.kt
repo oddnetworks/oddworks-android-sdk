@@ -23,14 +23,6 @@ object Oddworks {
     private val AUTHORIZED_VIEWER_ENTITLEMENTS = "${Oddworks::class.java.name}.AUTHORIZED_VIEWER_ENTITLEMENTS"
     private val AUTHORIZED_VIEWER_JWT = "${Oddworks::class.java.name}.AUTHORIZED_VIEWER_JWT"
 
-    @JvmStatic fun ioScheduler() : Scheduler {
-        return Schedulers.io()
-    }
-
-    @JvmStatic fun mainScheduler() : Scheduler {
-        return AndroidSchedulers.mainThread()
-    }
-
     @JvmStatic fun getStoredViewer(ctx: Context): OddViewer? {
         val prefs = ctx.getSharedPreferences(AUTHORIZED_VIEWER_PREFERENCES, Context.MODE_PRIVATE)
         val id = prefs.getString(AUTHORIZED_VIEWER_ID, null)

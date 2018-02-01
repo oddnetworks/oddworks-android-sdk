@@ -7,7 +7,7 @@ The __device-sdk__ is the Oddworks SDK for Android. It is a wrapper for the Oddw
 
 ## SDK API Documentation
 
-- [3.3.1](/javadoc/3.3.1) (latest)
+- [3.3.2](/javadoc/3.3.2) (latest)
 - [3.2.1](/javadoc/3.2.1)
 - [3.1.1](/javadoc/3.1.1)
 - [3.0.0](/javadoc/3.0.0)
