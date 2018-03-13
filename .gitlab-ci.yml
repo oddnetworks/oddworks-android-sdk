@@ -1,0 +1,28 @@
+# This file is a template, and might need editing before it works on your project.
+# Template project: https://gitlab.com/pages/jekyll
+# Docs: https://docs.gitlab.com/ce/pages/
+image: python:3.4
+
+before_script:
+- pip install mkdocs
+
+test:
+  stage: test
+  script:
+  - cd docs && mkdocs build && cd .. && mv docs/site test
+  artifacts:
+    paths:
+    - test
+  except:
+  - master
+
+pages:
+  stage: deploy
+  script:
+  - cd docs && mkdocs build && cd .. && mv docs/site public
+  artifacts:
+    paths:
+    - public
+  only:
+  - master
+
